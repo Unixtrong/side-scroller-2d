@@ -4,7 +4,13 @@ enum State {
 	IDLE,
 	WALK,
 	RUNNING,
+	HURT,
+	DYING
 }
+
+const KNOCKBACK_AMOUNT := 384.0
+
+var pending_damage: Damage
 
 @onready var wall_checker: RayCast2D = $Graphics/WallChecker
 @onready var player_checker: RayCast2D = $Graphics/PlayerChecker
@@ -14,7 +20,7 @@ enum State {
 
 func tick_physics(state: State, delta: float) -> void:
 	match state:
-		State.IDLE:
+		State.IDLE, State.HURT, State.DYING:
 			move(0.0, delta)
 		State.WALK:
 			move(max_speed * 0.5, delta)
@@ -27,19 +33,29 @@ func tick_physics(state: State, delta: float) -> void:
 				calm_down_timer.start()
 
 func get_next_state(state: State) -> State:
-	if player_checker.is_colliding():
-		return State.RUNNING
+	if stats.health == 0:
+		return State.DYING
+	
+	if pending_damage:
+		return State.HURT
 	
 	match state:
 		State.IDLE:
+			if player_checker.is_colliding():
+				return State.RUNNING
 			if state_machine.state_time > 2:
 				return State.WALK
 		State.WALK:
+			if player_checker.is_colliding():
+				return State.RUNNING
 			if wall_checker.is_colliding() or not floor_checker.is_colliding():
 				return State.IDLE
 		State.RUNNING:
-			if calm_down_timer.is_stopped():
+			if not player_checker.is_colliding() and calm_down_timer.is_stopped():
 				return State.IDLE
+		State.HURT:
+			if not animation_player.is_playing():
+				return State.RUNNING
 	
 	return state
 
@@ -72,3 +88,32 @@ func transition_state(from: State, to: State) -> void:
 		State.RUNNING:
 			animation_player.speed_scale = 1.0
 			animation_player.play("running")
+
+		State.HURT:
+			animation_player.speed_scale = 1.0
+			animation_player.play("hit")
+			# 掉血
+			stats.health -= pending_damage.amount
+			# 计算击退方向
+			var dir := pending_damage.source.global_position.direction_to(global_position)
+			print("knockback dir: %s" % [dir])
+			# 速度 = 击退方向 x 击退速度常亮
+			velocity = dir * KNOCKBACK_AMOUNT
+			velocity.y = 0.0
+			# 如果向右击退，则转向左侧；反之，右侧
+			if dir.x > 0:
+				direction = Direction.LEFT
+			else:
+				direction = Direction.RIGHT
+
+			pending_damage = null
+
+		State.DYING:
+			animation_player.speed_scale = 1.0
+			animation_player.play("die")
+
+
+func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
+	pending_damage = Damage.new()
+	pending_damage.amount = 1
+	pending_damage.source = hitbox.owner
