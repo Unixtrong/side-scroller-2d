@@ -7,10 +7,13 @@ enum State {
 	FALL,
 	LANDING,
 	WALL_SLIDING,
-	WALL_JUMP
+	WALL_JUMP,
+	ATTACK
 }
 
-const GROUND_STATES := [State.IDLE, State.RUNNING, State.LANDING]
+const GROUND_STATES := [
+	State.IDLE, State.RUNNING, State.LANDING, State.ATTACK,
+]
 const RUN_SPEED := 200.0
 const FLOOR_ACCELERATION := RUN_SPEED / 0.2
 const AIR_ACCELERATION := RUN_SPEED / 0.1
@@ -64,6 +67,9 @@ func tick_physics(state: State, delta: float) -> void:
 			else:
 				move(default_gravity, delta)
 
+		State.ATTACK:
+				stand(default_gravity, delta)
+
 	is_first_tick = false
 
 
@@ -95,21 +101,24 @@ func get_next_state(state: State) -> State:
 	var should_jump = can_jump and jump_request_timer.time_left > 0
 	if should_jump:
 		return State.JUMP
-	
+
+	if state in GROUND_STATES and not is_on_floor():
+		return State.FALL
+
 	var direction = Input.get_axis("move_left", "move_right")
 	# 是否站立不动
 	var is_still := is_zero_approx(direction) and is_zero_approx(velocity.x)
 
 	match state:
 		State.IDLE:
-			if not is_on_floor():
-				return State.FALL
+			if Input.is_action_just_pressed("attack"):
+				return State.ATTACK
 			if not is_still: # 空闲时，没有站立，进入跑步状态
 				return State.RUNNING
 
 		State.RUNNING:
-			if not is_on_floor():
-				return State.FALL
+			if Input.is_action_just_pressed("attack"):
+				return State.ATTACK
 			if is_still: # 跑步时，站立，进入空闲状态
 				return State.IDLE
 
@@ -141,16 +150,20 @@ func get_next_state(state: State) -> State:
 			if velocity.y >= 0: # 跳跃时，速度向下，进入坠落状态
 				return State.FALL
 
+		State.ATTACK:
+			if not animation_player.is_playing():
+				return State.IDLE
+
 	return state
 
 
 # 状态改变时调用
 func transition_state(from: State, to: State) -> void:
-	print("[%s] %s -> %s" % [
-		Engine.get_physics_frames(),
-		State.keys()[from] if from != -1 else "<START>",
-		State.keys()[to]
-	])
+	#print("[%s] %s -> %s" % [
+		#Engine.get_physics_frames(),
+		#State.keys()[from] if from != -1 else "<START>",
+		#State.keys()[to]
+	#])
 	if from not in GROUND_STATES and to in GROUND_STATES:
 		coyote_timer.stop()
 
@@ -184,5 +197,8 @@ func transition_state(from: State, to: State) -> void:
 			velocity = WALL_JUMP_VELOCITY
 			velocity.x *= get_wall_normal().x
 			jump_request_timer.stop()
+
+		State.ATTACK:
+			animation_player.play("attack")
 	
 	is_first_tick = true
