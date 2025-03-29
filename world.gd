@@ -7,7 +7,7 @@ extends Node2D
 
 func _ready() -> void:
 	# 获取 TileMap2D 子场景中的 Platform 节点
-	var platform = get_node("TileMap2D/Platform") as TileMapLayer
+	var platform = get_node("TileMap2D/Edge") as TileMapLayer
 	# 获取已使用的矩形尺寸，单位是单元格个数
 	var used = platform.get_used_rect()
 	# 每个单元格的尺寸，单位像素
