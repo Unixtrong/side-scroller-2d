@@ -2,6 +2,7 @@ extends Enemy
 
 enum State {
 	IDLE,
+	ATTENTION,
 	WALK,
 	RUNNING,
 	HURT,
@@ -18,11 +19,12 @@ var pending_damage: Damage
 @onready var player_checker: RayCast2D = $Graphics/PlayerChecker
 @onready var floor_checker: RayCast2D = $Graphics/FloorChecker
 @onready var calm_down_timer: Timer = $CalmDownTimer
+@onready var attention_anim: AnimatedSprite2D = $AttentionAnimation
 
 
 func tick_physics(state: State, delta: float) -> void:
 	match state:
-		State.IDLE, State.HURT, State.DYING:
+		State.IDLE, State.ATTENTION, State.HURT, State.DYING:
 			move(0.0, delta)
 		State.WALK:
 			move(max_speed * 0.5, delta)
@@ -44,12 +46,15 @@ func get_next_state(state: State) -> State:
 	match state:
 		State.IDLE:
 			if player_checker.is_colliding():
-				return State.RUNNING
+				return State.ATTENTION
 			if state_machine.state_time > 2:
 				return State.WALK
+		State.ATTENTION:
+			if not attention_anim.is_playing():
+				return State.RUNNING
 		State.WALK:
 			if player_checker.is_colliding():
-				return State.RUNNING
+				return State.ATTENTION
 			if wall_checker.is_colliding() or not floor_checker.is_colliding():
 				return State.IDLE
 		State.RUNNING:
@@ -62,7 +67,7 @@ func get_next_state(state: State) -> State:
 	return state
 
 
-# 状态改变时调用
+# 状态改变时调用d
 func transition_state(from: State, to: State) -> void:
 	#print("[%s] %s -> %s" % [
 		#Engine.get_physics_frames(),
@@ -77,6 +82,14 @@ func transition_state(from: State, to: State) -> void:
 			# 看见墙，转身
 			if wall_checker.is_colliding():
 				direction *= -1
+
+		State.ATTENTION:
+			animation_player.speed_scale = 1.0
+			animation_player.play("idle")
+			attention_anim.show()
+			attention_anim.play("default")
+			await attention_anim.animation_finished
+			attention_anim.hide()
 
 		State.WALK:
 			animation_player.speed_scale = 0.3

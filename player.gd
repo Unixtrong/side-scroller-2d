@@ -1,4 +1,10 @@
+class_name Player
 extends CharacterBody2D
+
+enum Direction {
+	LEFT = -1,
+	RIGHT = 1,
+}
 
 enum State {
 	IDLE,
@@ -29,12 +35,21 @@ const WALL_JUMP_VELOCITY := Vector2(500.0, -240.0)
 # 击退速度
 const KNOCKBACK_AMOUNT := 384.0
 
+@export var direction := Direction.RIGHT:
+	set(v):
+		direction = v
+		if not is_node_ready():
+			await ready
+		graphics.scale.x = direction
+
 # 缺省重力加速度
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
 # 是否当前状态第一帧
 var is_first_tick := true
 # 待处理伤害
 var pending_damage: Damage
+# 交互对象组
+var interacting_with: Array[Interactable]
 
 @onready var graphics: Node2D = $Graphics
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -45,7 +60,9 @@ var pending_damage: Damage
 @onready var hammer_checker: RayCast2D = $Graphics/HammerChecker
 @onready var foot_checker: RayCast2D = $Graphics/FootChecker
 @onready var state_machine: StateMachine = $StateMachine
-@onready var stats: Stats = $Stats
+@onready var stats: Stats = Game.player_stats
+@onready var interaction_icon: AnimatedSprite2D = $InteractionIcon
+
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,9 +72,13 @@ func _unhandled_input(event: InputEvent) -> void:
 		jump_request_timer.stop()
 		if velocity.y < JUMP_VELOCITY / 2:
 			velocity.y = JUMP_VELOCITY / 2
+	if event.is_action_pressed("interact") and not interacting_with.is_empty():
+		interacting_with.back().interact()
 
 
 func tick_physics(state: State, delta: float) -> void:
+	interaction_icon.visible = not interacting_with.is_empty()
+
 	if invincible_timer.time_left > 0:
 		@warning_ignore("integer_division")
 		graphics.modulate.a = sin(Time.get_ticks_msec() / 50) * 0.5 + 0.5
@@ -100,13 +121,13 @@ func tick_physics(state: State, delta: float) -> void:
 
 func move(gravity: float, delta: float) -> void:
 	#print("move, gravity: ", gravity, ", delta: ", delta)
-	var direction = Input.get_axis("move_left", "move_right")
+	var movement = Input.get_axis("move_left", "move_right")
 	var acceleration = FLOOR_ACCELERATION if is_on_floor() else AIR_ACCELERATION
-	velocity.x = move_toward(velocity.x, direction * RUN_SPEED, acceleration * delta)
+	velocity.x = move_toward(velocity.x, movement * RUN_SPEED, acceleration * delta)
 	velocity.y += gravity * delta
 
-	if not is_zero_approx(direction):
-		graphics.scale.x = -1 if direction < 0 else 1
+	if not is_zero_approx(movement):
+		direction = Direction.LEFT if movement < 0 else Direction.RIGHT
 
 	move_and_slide()
 
@@ -117,6 +138,19 @@ func stand(gravity: float, delta: float) -> void:
 	velocity.y += gravity * delta
 
 	move_and_slide()
+
+
+func register_interactable(v: Interactable) -> void:
+	if state_machine.current_state == State.DYING:
+		return
+	if v in interacting_with:
+		return
+	interacting_with.append(v)
+
+
+func unregister_interactable(v: Interactable) -> void:
+	interacting_with.erase(v)
+
 
 func can_wall_slide(direction: float) -> bool:
 	return is_on_wall() and not is_zero_approx(direction) and hammer_checker.is_colliding() and foot_checker.is_colliding()
@@ -253,6 +287,7 @@ func transition_state(from: State, to: State) -> void:
 		State.DYING:
 			animation_player.play("die")
 			invincible_timer.stop()
+			interacting_with.clear()
 	
 	is_first_tick = true
 
@@ -275,4 +310,5 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 
 
 func _on_reset_world_timer_timeout() -> void:
+	Game.player_stats.health = Game.player_stats.max_health
 	get_tree().reload_current_scene()

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://ebm6k0rptlrn"]
+
+[ext_resource type="Script" uid="uid://cvwvbe6oykiap" path="res://classes/Teleporter.gd" id="1_mconn"]
+[ext_resource type="Texture2D" uid="uid://bubadihpbg862" path="res://art/KingsAndPigs/Sprites/11-Door/Idle.png" id="2_8x2ms"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brfo1"]
+size = Vector2(44, 54)
+
+[node name="SceneDoor" type="Area2D"]
+script = ExtResource("1_mconn")
+metadata/_custom_type_script = "uid://cvwvbe6oykiap"
+
+[node name="Idle" type="Sprite2D" parent="."]
+texture = ExtResource("2_8x2ms")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_brfo1")

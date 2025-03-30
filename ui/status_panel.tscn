@@ -1,0 +1,87 @@
+[gd_scene load_steps=9 format=3 uid="uid://dathxnywliihx"]
+
+[ext_resource type="Script" uid="uid://cktdpf2xi3tht" path="res://ui/status_panel.gd" id="1_0jk47"]
+[ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://art/KingsAndPigs/Sprites/01-King Human/Idle (78x58).png" id="1_nq8qi"]
+[ext_resource type="Texture2D" uid="uid://cs8nb0q000acu" path="res://art/KingsAndPigs/Sprites/12-Live and Coins/health_bar.png" id="2_3plgq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nq8qi"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.901961, 0.713726, 0.596078, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3plgq"]
+atlas = ExtResource("1_nq8qi")
+region = Rect2(22, 18, 19, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0jk47"]
+atlas = ExtResource("2_3plgq")
+region = Rect2(3, 22, 44, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nptj"]
+atlas = ExtResource("2_3plgq")
+region = Rect2(3, 12, 44, 6)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqk2t"]
+atlas = ExtResource("2_3plgq")
+region = Rect2(3, 3, 44, 6)
+
+[node name="StatusPanel" type="HBoxContainer"]
+offset_right = 46.0
+offset_bottom = 26.0
+script = ExtResource("1_0jk47")
+
+[node name="AvatarBox" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(26, 26)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nq8qi")
+
+[node name="Avatar" type="TextureRect" parent="AvatarBox"]
+layout_mode = 2
+texture = SubResource("AtlasTexture_3plgq")
+stretch_mode = 5
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+custom_minimum_size = Vector2(100, 6)
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.0
+value = 0.8
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 2
+stretch_margin_right = 3
+stretch_margin_bottom = 2
+texture_over = SubResource("AtlasTexture_0jk47")
+texture_progress = SubResource("AtlasTexture_7nptj")
+
+[node name="EasedHealthBar" type="TextureProgressBar" parent="HealthBar"]
+show_behind_parent = true
+custom_minimum_size = Vector2(100, 6)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.0
+value = 1.0
+nine_patch_stretch = true
+stretch_margin_left = 3
+stretch_margin_top = 2
+stretch_margin_right = 3
+stretch_margin_bottom = 2
+texture_progress = SubResource("AtlasTexture_uqk2t")
