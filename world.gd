@@ -38,6 +38,24 @@ func on_pig_died():
 	spawn_pig()  # 重新生成小怪
 
 
+func from_dict(dict: Dictionary) -> void:
+	for node in get_tree().get_nodes_in_group("enemies"):
+		var path := get_path_to(node)
+		if path not in dict.enemies_alive:
+			node.queue_free()
+
+
+func to_dict() -> Dictionary:
+	var enemies_alive := []
+	for node in get_tree().get_nodes_in_group("enemies"):
+		var path := get_path_to(node)
+		enemies_alive.append(path)
+	
+	return {
+		enemies_alive = enemies_alive
+	}
+
+
 func update_player(position: Vector2, direction: Player.Direction) -> void:
 	player.global_position = position
 	camera_2d.reset_smoothing()

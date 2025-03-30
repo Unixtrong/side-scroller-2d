@@ -1,11 +1,11 @@
 [gd_scene load_steps=4 format=3 uid="uid://buuu6f7eanmug"]
 
-[ext_resource type="Script" uid="uid://dvmtje6kf244b" path="res://room_2.gd" id="1_ttdm0"]
+[ext_resource type="Script" uid="uid://b7ddvldpayxoi" path="res://world.gd" id="1_qfw8o"]
 [ext_resource type="PackedScene" uid="uid://dx23jts7va17q" path="res://map_2.tscn" id="2_h83ob"]
 [ext_resource type="PackedScene" uid="uid://bvkd8b2dqhcma" path="res://player.tscn" id="5_f7hpu"]
 
 [node name="World" type="Node2D"]
-script = ExtResource("1_ttdm0")
+script = ExtResource("1_qfw8o")
 
 [node name="TileMap2D" parent="." instance=ExtResource("2_h83ob")]
 
