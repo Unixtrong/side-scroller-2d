@@ -7,6 +7,8 @@
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tlwt5")
+pig_scene = ExtResource("4_aqk2v")
+spawn_position = Vector2(300, 154)
 
 [node name="TileMap2D" parent="." instance=ExtResource("2_fj7yv")]
 
@@ -22,6 +24,3 @@ drag_vertical_enabled = true
 drag_left_margin = 0.4
 drag_right_margin = 0.4
 editor_draw_drag_margin = true
-
-[node name="Pig" parent="." instance=ExtResource("4_aqk2v")]
-position = Vector2(429, 154)

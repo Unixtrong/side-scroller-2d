@@ -8,28 +8,44 @@ enum State {
 	LANDING,
 	WALL_SLIDING,
 	WALL_JUMP,
-	ATTACK
+	ATTACK,
+	HURT,
+	DYING
 }
 
 const GROUND_STATES := [
-	State.IDLE, State.RUNNING, State.LANDING, State.ATTACK,
+	State.IDLE, State.RUNNING, State.LANDING,
+	State.ATTACK, State.HURT, State.DYING
 ]
 const RUN_SPEED := 200.0
+# 地面加速度，0.2 秒加到满速
 const FLOOR_ACCELERATION := RUN_SPEED / 0.2
+# 空中加速度，0.1 秒加到满速
 const AIR_ACCELERATION := RUN_SPEED / 0.1
+# 起跳速度
 const JUMP_VELOCITY := -360.0
+# 蹬墙跳速度向量
 const WALL_JUMP_VELOCITY := Vector2(500.0, -240.0)
+# 击退速度
+const KNOCKBACK_AMOUNT := 384.0
 
+# 缺省重力加速度
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
+# 是否当前状态第一帧
 var is_first_tick := true
+# 待处理伤害
+var pending_damage: Damage
 
 @onready var graphics: Node2D = $Graphics
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var jump_request_timer: Timer = $JumpRequestTimer
+@onready var invincible_timer: Timer = $InvincibleTimer
+@onready var reset_world_timer: Timer = $ResetWorldTimer
 @onready var hammer_checker: RayCast2D = $Graphics/HammerChecker
 @onready var foot_checker: RayCast2D = $Graphics/FootChecker
 @onready var state_machine: StateMachine = $StateMachine
+@onready var stats: Stats = $Stats
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -42,6 +58,12 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func tick_physics(state: State, delta: float) -> void:
+	if invincible_timer.time_left > 0:
+		@warning_ignore("integer_division")
+		graphics.modulate.a = sin(Time.get_ticks_msec() / 50) * 0.5 + 0.5
+	else:
+		graphics.modulate.a = 1
+
 	match state:
 		State.IDLE:
 			move(default_gravity, delta)
@@ -70,6 +92,9 @@ func tick_physics(state: State, delta: float) -> void:
 		State.ATTACK:
 				stand(default_gravity, delta)
 
+		State.HURT, State.DYING:
+			stand(default_gravity, delta)
+
 	is_first_tick = false
 
 
@@ -97,6 +122,12 @@ func can_wall_slide(direction: float) -> bool:
 	return is_on_wall() and not is_zero_approx(direction) and hammer_checker.is_colliding() and foot_checker.is_colliding()
 
 func get_next_state(state: State) -> State:
+	if stats.health == 0:
+		return State.DYING
+	
+	if pending_damage:
+		return State.HURT
+
 	var can_jump = is_on_floor() or coyote_timer.time_left > 0
 	var should_jump = can_jump and jump_request_timer.time_left > 0
 	if should_jump:
@@ -154,16 +185,20 @@ func get_next_state(state: State) -> State:
 			if not animation_player.is_playing():
 				return State.IDLE
 
+		State.HURT:
+			if not animation_player.is_playing():
+				return State.RUNNING
+
 	return state
 
 
 # 状态改变时调用
 func transition_state(from: State, to: State) -> void:
-	#print("[%s] %s -> %s" % [
-		#Engine.get_physics_frames(),
-		#State.keys()[from] if from != -1 else "<START>",
-		#State.keys()[to]
-	#])
+	print("[%s] %s -> %s" % [
+		Engine.get_physics_frames(),
+		State.keys()[from] if from != -1 else "<START>",
+		State.keys()[to]
+	])
 	if from not in GROUND_STATES and to in GROUND_STATES:
 		coyote_timer.stop()
 
@@ -200,5 +235,44 @@ func transition_state(from: State, to: State) -> void:
 
 		State.ATTACK:
 			animation_player.play("attack")
+
+		State.HURT:
+			animation_player.play("hurt")
+			# 掉血
+			stats.health -= pending_damage.amount
+			# 计算击退方向
+			var dir := pending_damage.source.global_position.direction_to(global_position)
+			print("Player, knockback dir: %s" % [dir])
+			# 速度 = 击退方向 x 击退速度常亮
+			velocity = dir * KNOCKBACK_AMOUNT
+			#velocity.y = 0.0
+			invincible_timer.start()
+
+			pending_damage = null
+
+		State.DYING:
+			animation_player.play("die")
+			invincible_timer.stop()
 	
 	is_first_tick = true
+
+
+func die() -> void:
+	pass
+
+
+func count_donw_reset_world() -> void:
+	reset_world_timer.start()
+
+
+func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
+	if invincible_timer.time_left > 0:
+		return
+
+	pending_damage = Damage.new()
+	pending_damage.amount = 1
+	pending_damage.source = hitbox.owner
+
+
+func _on_reset_world_timer_timeout() -> void:
+	get_tree().reload_current_scene()

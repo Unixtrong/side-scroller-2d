@@ -27,6 +27,12 @@ metadata/_custom_type_script = "uid://cxn8xvygr8tum"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
+[node name="FreeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_7frlh")
 metadata/_custom_type_script = "uid://bhvfxmsj7fely"
+
+[connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

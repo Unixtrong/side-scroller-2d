@@ -5,8 +5,10 @@ enum State {
 	WALK,
 	RUNNING,
 	HURT,
-	DYING
+	DYING,
 }
+
+signal pig_free
 
 const KNOCKBACK_AMOUNT := 384.0
 
@@ -62,11 +64,11 @@ func get_next_state(state: State) -> State:
 
 # 状态改变时调用
 func transition_state(from: State, to: State) -> void:
-	print("[%s] %s -> %s" % [
-		Engine.get_physics_frames(),
-		State.keys()[from] if from != -1 else "<START>",
-		State.keys()[to]
-	])
+	#print("[%s] %s -> %s" % [
+		#Engine.get_physics_frames(),
+		#State.keys()[from] if from != -1 else "<START>",
+		#State.keys()[to]
+	#])
 
 	match to:
 		State.IDLE:
@@ -117,3 +119,8 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	pending_damage = Damage.new()
 	pending_damage.amount = 1
 	pending_damage.source = hitbox.owner
+
+
+func _on_free_timer_timeout() -> void:
+	pig_free.emit()
+	super()
