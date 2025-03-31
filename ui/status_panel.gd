@@ -11,6 +11,11 @@ func _ready() -> void:
 		stats = Game.player_stats
 	stats.health_changed.connect(update_health)
 	update_health(true)
+	
+	# 旧版本需要在退出场景树时解除此类检测
+	tree_exited.connect(func ():
+		stats.health_changed.disconnect(update_health)
+	)
 
 
 func update_health(skip_animation := false) -> void:

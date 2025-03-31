@@ -14,3 +14,15 @@ signal health_changed
 			return
 		health = v
 		health_changed.emit()
+
+
+func to_dict() -> Dictionary:
+	return {
+		max_health=max_health,
+		health=health,
+	}
+
+
+func from_dict(dict: Dictionary) -> void:
+	max_health = dict.max_health
+	health = dict.health

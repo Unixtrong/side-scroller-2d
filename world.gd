@@ -38,17 +38,24 @@ func on_pig_died():
 	spawn_pig()  # 重新生成小怪
 
 
+# 从字典中重新加载场景状态
 func from_dict(dict: Dictionary) -> void:
+	# 获取所有敌人分组内的节点
 	for node in get_tree().get_nodes_in_group("enemies"):
+		# 获取当前节点（World）到 node 的相对路径
 		var path := get_path_to(node)
+		# 如果敌人路径不在保存的字典内，删除该敌人
 		if path not in dict.enemies_alive:
 			node.queue_free()
 
 
+# 将场景状态转换为字典
 func to_dict() -> Dictionary:
 	var enemies_alive := []
+	# 获取所有敌人分组内的节点
 	for node in get_tree().get_nodes_in_group("enemies"):
-		var path := get_path_to(node)
+		# 获取当前节点（World）到 node 的相对路径，存入数组
+		var path := get_path_to(node) as String
 		enemies_alive.append(path)
 	
 	return {
