@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr0iv64utohl7"
-path="res://.godot/imported/Terrain (32x32).png-b0410306264e505eb3f6992fc25bab81.ctex"
+uid="uid://cijyxcnlpspxa"
+path="res://.godot/imported/Fall (78x58).png-00d658277badc5d9c38ca63675126931.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/14-TileSets/Terrain (32x32).png"
-dest_files=["res://.godot/imported/Terrain (32x32).png-b0410306264e505eb3f6992fc25bab81.ctex"]
+source_file="res://assets/sprites/player/Fall (78x58).png"
+dest_files=["res://.godot/imported/Fall (78x58).png-00d658277badc5d9c38ca63675126931.ctex"]
 
 [params]
 

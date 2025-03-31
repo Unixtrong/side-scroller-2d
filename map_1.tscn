@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=4 uid="uid://sm3psxmopkc0"]
 
-[ext_resource type="Texture2D" uid="uid://cr0iv64utohl7" path="res://art/KingsAndPigs/Sprites/14-TileSets/Terrain (32x32).png" id="1_0no57"]
-[ext_resource type="Texture2D" uid="uid://dsx4dcok6xu34" path="res://art/KingsAndPigs/Sprites/14-TileSets/Decorations (32x32).png" id="2_wijl4"]
+[ext_resource type="Texture2D" uid="uid://cr0iv64utohl7" path="res://assets/sprites/tile_sets/Terrain (32x32).png" id="1_0no57"]
+[ext_resource type="Texture2D" uid="uid://dsx4dcok6xu34" path="res://assets/sprites/tile_sets/Decorations (32x32).png" id="2_wijl4"]
 [ext_resource type="PackedScene" uid="uid://ebm6k0rptlrn" path="res://objects/scene_door.tscn" id="3_1q0j8"]
 [ext_resource type="Script" uid="uid://8qbpjjrlnw3l" path="res://classes/EntryPoint.gd" id="4_n2bu5"]
 

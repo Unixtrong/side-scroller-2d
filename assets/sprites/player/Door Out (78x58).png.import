@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ue3lmu8r4h02"
-path="res://.godot/imported/Wall Sliding.png-df8ad1a50601d275772d6de1d410099a.ctex"
+uid="uid://cegotk0t8o4i2"
+path="res://.godot/imported/Door Out (78x58).png-8ccd8896a3f1ce3008fe62ab507a5d7a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Wall Sliding.png"
-dest_files=["res://.godot/imported/Wall Sliding.png-df8ad1a50601d275772d6de1d410099a.ctex"]
+source_file="res://assets/sprites/player/Door Out (78x58).png"
+dest_files=["res://.godot/imported/Door Out (78x58).png-8ccd8896a3f1ce3008fe62ab507a5d7a.ctex"]
 
 [params]
 

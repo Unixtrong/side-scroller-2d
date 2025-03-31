@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cegotk0t8o4i2"
-path="res://.godot/imported/Door Out (78x58).png-61e3087528a07e22a5281c63c23221c2.ctex"
+uid="uid://c86ore0d5c2jx"
+path="res://.godot/imported/Hit (78x58).png-17fe02a6e626b3813ec35630143a1d46.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Door Out (78x58).png"
-dest_files=["res://.godot/imported/Door Out (78x58).png-61e3087528a07e22a5281c63c23221c2.ctex"]
+source_file="res://assets/sprites/player/Hit (78x58).png"
+dest_files=["res://.godot/imported/Hit (78x58).png-17fe02a6e626b3813ec35630143a1d46.ctex"]
 
 [params]
 

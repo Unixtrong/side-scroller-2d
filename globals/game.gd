@@ -10,11 +10,7 @@ var world_states := {}
 
 @onready var player_stats: Stats = $PlayerStats
 @onready var color_rect: ColorRect = $ColorRect
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		load_game()
+@onready var default_player_stats := player_stats.to_dict()
 
 
 # 切换游戏场景
@@ -28,9 +24,10 @@ func change_scene(path: String, params := {}) -> void:
 	tween.tween_property(color_rect, "color:a", 1, 0.2)
 	await tween.finished
 	
-	# 保存旧场景中的数据字典
-	var old_name = tree.current_scene.scene_file_path.get_file().get_basename()
-	world_states[old_name] = tree.current_scene.to_dict()
+	if tree.current_scene is World:
+		# 保存旧场景中的数据字典
+		var old_name = tree.current_scene.scene_file_path.get_file().get_basename()
+		world_states[old_name] = tree.current_scene.to_dict()
 	
 	# 切换场景
 	tree.change_scene_to_file(path)
@@ -42,10 +39,11 @@ func change_scene(path: String, params := {}) -> void:
 	# 等待节点数发生变化，即场景切换完成
 	await tree.tree_changed
 	
-	# 加载旧场景中保存的数据字典
-	var new_name := tree.current_scene.scene_file_path.get_file().get_basename()
-	if new_name in world_states:
-		tree.current_scene.from_dict(world_states[new_name])
+	if tree.current_scene is World:
+		# 加载旧场景中保存的数据字典
+		var new_name := tree.current_scene.scene_file_path.get_file().get_basename()
+		if new_name in world_states:
+			tree.current_scene.from_dict(world_states[new_name])
 	
 	# 如果参数中包含入口点，说明是通过交互切换场景
 	if "entry_point" in params:
@@ -106,3 +104,22 @@ func load_game() -> void:
 			world_states = data.world_states
 			player_stats.from_dict(data.stats)
 	})
+
+
+# 切换游戏场景
+func new_game() -> void:
+	change_scene("res://worlds/room_1.tscn", {
+		on_scene_changed=func ():
+			world_states = {}
+			player_stats.from_dict(default_player_stats)
+	})
+
+
+# 返回标题
+func back_to_title() -> void:
+	change_scene("res://ui/title_screen.tscn")
+
+
+# 是否有存档
+func has_save() -> bool:
+	return FileAccess.file_exists(SAVE_PATH)

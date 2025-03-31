@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dathxnywliihx"]
 
 [ext_resource type="Script" uid="uid://cktdpf2xi3tht" path="res://ui/status_panel.gd" id="1_0jk47"]
-[ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://art/KingsAndPigs/Sprites/01-King Human/Idle (78x58).png" id="1_nq8qi"]
+[ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://assets/sprites/player/Idle (78x58).png" id="1_nq8qi"]
 [ext_resource type="Texture2D" uid="uid://cs8nb0q000acu" path="res://art/KingsAndPigs/Sprites/12-Live and Coins/health_bar.png" id="2_3plgq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nq8qi"]

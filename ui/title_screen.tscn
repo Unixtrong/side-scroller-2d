@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=4 uid="uid://dx23jts7va17q"]
+[gd_scene load_steps=28 format=4 uid="uid://c22u3nec4bqa6"]
 
-[ext_resource type="Texture2D" uid="uid://cr0iv64utohl7" path="res://assets/sprites/tile_sets/Terrain (32x32).png" id="2_ferli"]
-[ext_resource type="PackedScene" uid="uid://ebm6k0rptlrn" path="res://objects/scene_door.tscn" id="3_5wxai"]
-[ext_resource type="Texture2D" uid="uid://dsx4dcok6xu34" path="res://assets/sprites/tile_sets/Decorations (32x32).png" id="3_oqi2f"]
-[ext_resource type="Script" uid="uid://8qbpjjrlnw3l" path="res://classes/EntryPoint.gd" id="4_igs0g"]
+[ext_resource type="Theme" uid="uid://b5552gr7ldimv" path="res://ui/main_theme.tres" id="1_bor1v"]
+[ext_resource type="Script" uid="uid://d34ukp7y06hth" path="res://ui/title_screen.gd" id="2_bor1v"]
+[ext_resource type="Texture2D" uid="uid://cr0iv64utohl7" path="res://assets/sprites/tile_sets/Terrain (32x32).png" id="3_l1ku3"]
+[ext_resource type="Texture2D" uid="uid://dsx4dcok6xu34" path="res://assets/sprites/tile_sets/Decorations (32x32).png" id="4_6qcwj"]
+[ext_resource type="Texture2D" uid="uid://bubadihpbg862" path="res://art/KingsAndPigs/Sprites/11-Door/Idle.png" id="5_6qcwj"]
+[ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://assets/sprites/player/Idle (78x58).png" id="5_wa5rm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_53bcp"]
-texture = ExtResource("2_ferli")
+texture = ExtResource("3_l1ku3")
 texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 1:1/0/terrain_set = 0
@@ -244,7 +246,7 @@ terrain_set_0/terrain_0/color = Color(1, 1, 1, 1)
 sources/1 = SubResource("TileSetAtlasSource_53bcp")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_c7s6e"]
-texture = ExtResource("2_ferli")
+texture = ExtResource("3_l1ku3")
 texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 2:1/0 = 0
@@ -402,45 +404,8 @@ terrain_set_0/terrain_0/name = "背景"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
 sources/1 = SubResource("TileSetAtlasSource_c7s6e")
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p5pve"]
-texture = ExtResource("3_oqi2f")
-texture_region_size = Vector2i(32, 32)
-1:1/0 = 0
-2:1/0 = 0
-2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -9.6, -16, -9.6)
-3:1/0 = 0
-3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -9.6, -16, -9.6)
-4:1/0 = 0
-4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -9.6, -16, -9.6)
-5:1/0 = 0
-5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -9.6, -16, -9.6)
-1:2/0 = 0
-2:2/0 = 0
-2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -3.2, -16, -3.2)
-3:2/0 = 0
-3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -3.2, -16, -3.2)
-4:2/0 = 0
-4:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -3.2, -16, -3.2)
-5:2/0 = 0
-5:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, -3.2, -16, -3.2)
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-4:3/0 = 0
-5:3/0 = 0
-1:4/0 = 0
-2:4/0 = 0
-3:4/0 = 0
-4:4/0 = 0
-5:4/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_urblq"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
-sources/1 = SubResource("TileSetAtlasSource_p5pve")
-
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_e0an3"]
-texture = ExtResource("3_oqi2f")
+texture = ExtResource("4_6qcwj")
 texture_region_size = Vector2i(32, 32)
 1:1/0 = 0
 2:1/0 = 0
@@ -467,31 +432,205 @@ texture_region_size = Vector2i(32, 32)
 tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_e0an3")
 
-[node name="TileMap2D" type="Node2D"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfunj"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(0, 0, 78, 58)
 
-[node name="Edge" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAAJAAcAAQACAAEAAAAJAAQAAQACAAIAAAAJAAMAAQACAAIAAAAJAAIAAQACAAIAAAAIAAcAAQACAAEAAAAIAAYAAQACAAIAAAAIAAQAAQACAAIAAAAIAAMAAQACAAIAAAAIAAIAAQACAAIAAAAHAAcAAQACAAEAAAAHAAYAAQACAAIAAAAHAAUAAQACAAIAAAAHAAQAAQACAAIAAAAHAAMAAQACAAIAAAAHAAIAAQACAAIAAAAGAAcAAQACAAEAAAAGAAYAAQACAAIAAAAGAAUAAQACAAIAAAAGAAQAAQACAAIAAAAGAAMAAQACAAIAAAAGAAIAAQACAAIAAAAFAAcAAQACAAEAAAAFAAYAAQACAAIAAAAFAAUAAQACAAIAAAAFAAQAAQACAAIAAAAFAAMAAQACAAIAAAAFAAIAAQACAAIAAAAEAAcAAQACAAEAAAAEAAYAAQACAAIAAAAEAAUAAQACAAIAAAAEAAQAAQACAAIAAAAEAAMAAQACAAIAAAAEAAIAAQACAAIAAAADAAcAAQACAAEAAAADAAYAAQACAAIAAAADAAUAAQACAAIAAAADAAQAAQACAAIAAAADAAMAAQACAAIAAAADAAIAAQACAAIAAAACAAcAAQACAAEAAAACAAYAAQACAAIAAAACAAUAAQACAAIAAAACAAQAAQACAAIAAAACAAMAAQACAAIAAAACAAIAAQACAAIAAAABAAcAAQACAAEAAAABAAYAAQACAAIAAAABAAUAAQACAAIAAAABAAQAAQACAAIAAAABAAMAAQACAAIAAAABAAIAAQACAAIAAAAAAAcAAQAHAAIAAAAAAAYAAQADAAIAAAAAAAUAAQADAAIAAAAAAAQAAQADAAIAAAAAAAMAAQADAAIAAAAAAAIAAQADAAIAAAAAAAEAAQADAAIAAAABAAEAAQACAAIAAAACAAEAAQACAAIAAAADAAEAAQACAAIAAAAEAAEAAQACAAIAAAAFAAEAAQACAAIAAAAGAAEAAQACAAIAAAAHAAEAAQACAAIAAAAIAAEAAQACAAIAAAAJAAEAAQACAAIAAAAIAAUAAQACAAIAAAAJAAUAAQACAAIAAAAJAAYAAQACAAIAAAAKAAEAAQACAAIAAAAKAAIAAQACAAIAAAAKAAMAAQACAAIAAAAKAAQAAQACAAIAAAAKAAUAAQACAAIAAAAKAAYAAQACAAIAAAAKAAcAAQACAAEAAAAKAAAAAQACAAMAAAAJAAAAAQACAAMAAAAIAAAAAQACAAMAAAAHAAAAAQACAAMAAAAGAAAAAQACAAMAAAAFAAAAAQACAAMAAAAEAAAAAQACAAMAAAADAAAAAQACAAMAAAACAAAAAQACAAMAAAABAAAAAQACAAMAAAAAAAAAAQAHAAEAAAALAAcAAQAIAAIAAAALAAYAAQABAAIAAAALAAUAAQABAAIAAAALAAQAAQABAAIAAAALAAMAAQABAAIAAAALAAIAAQABAAIAAAALAAEAAQABAAIAAAALAAAAAQAIAAEAAAA=")
+[sub_resource type="AtlasTexture" id="AtlasTexture_rg5jq"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(78, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jprmh"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(156, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rakse"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(234, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdjtn"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(312, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n3uk4"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(390, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_honwq"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(468, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qp3kr"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(546, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6vjt"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(624, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tph38"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(702, 0, 78, 58)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ue7h3"]
+atlas = ExtResource("5_wa5rm")
+region = Rect2(780, 0, 78, 58)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_126hm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfunj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rg5jq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jprmh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rakse")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdjtn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n3uk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_honwq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qp3kr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6vjt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tph38")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ue7h3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 11.0
+}]
+
+[sub_resource type="Animation" id="Animation_6qcwj"]
+resource_name = "enter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("V:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector2(397, 118), Vector2(246, 118)]
+}
+
+[sub_resource type="Animation" id="Animation_wa5rm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("V:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(246, 118)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_sfunj"]
+_data = {
+&"RESET": SubResource("Animation_wa5rm"),
+&"enter": SubResource("Animation_6qcwj")
+}
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_bor1v")
+script = ExtResource("2_bor1v")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Edge" type="TileMapLayer" parent="Graphics"]
+tile_map_data = PackedByteArray("AAAJAAcAAQACAAEAAAAJAAQAAQACAAIAAAAJAAMAAQACAAIAAAAJAAIAAQACAAIAAAAIAAcAAQACAAEAAAAIAAYAAQACAAIAAAAIAAQAAQACAAIAAAAIAAMAAQACAAIAAAAIAAIAAQACAAIAAAAHAAcAAQACAAEAAAAHAAYAAQACAAIAAAAHAAUAAQACAAIAAAAHAAQAAQACAAIAAAAHAAMAAQACAAIAAAAHAAIAAQACAAIAAAAGAAcAAQACAAEAAAAGAAYAAQACAAIAAAAGAAUAAQACAAIAAAAGAAQAAQACAAIAAAAGAAMAAQACAAIAAAAGAAIAAQACAAIAAAAFAAcAAQACAAEAAAAFAAYAAQACAAIAAAAFAAUAAQACAAIAAAAFAAQAAQACAAIAAAAFAAMAAQACAAIAAAAFAAIAAQACAAIAAAAEAAcAAQACAAEAAAAEAAYAAQACAAIAAAAEAAUAAQACAAIAAAAEAAQAAQACAAIAAAAEAAMAAQACAAIAAAAEAAIAAQACAAIAAAADAAcAAQACAAEAAAADAAYAAQACAAIAAAADAAUAAQACAAIAAAADAAQAAQACAAIAAAADAAMAAQACAAIAAAADAAIAAQACAAIAAAACAAcAAQACAAEAAAACAAYAAQACAAIAAAACAAUAAQACAAIAAAACAAQAAQACAAIAAAACAAMAAQACAAIAAAACAAIAAQACAAIAAAABAAcAAQACAAEAAAABAAYAAQACAAIAAAABAAUAAQACAAIAAAABAAQAAQACAAIAAAABAAMAAQACAAIAAAABAAIAAQACAAIAAAAAAAcAAQAHAAIAAAAAAAYAAQADAAIAAAAAAAUAAQADAAIAAAAAAAQAAQADAAIAAAAAAAMAAQADAAIAAAAAAAIAAQADAAIAAAAAAAEAAQADAAIAAAABAAEAAQACAAIAAAACAAEAAQACAAIAAAADAAEAAQACAAIAAAAEAAEAAQACAAIAAAAFAAEAAQACAAIAAAAGAAEAAQACAAIAAAAHAAEAAQACAAIAAAAIAAEAAQACAAIAAAAJAAEAAQACAAIAAAAIAAUAAQACAAIAAAAJAAUAAQACAAIAAAAJAAYAAQACAAIAAAAKAAEAAQACAAIAAAAKAAIAAQACAAIAAAAKAAMAAQACAAIAAAAKAAQAAQACAAIAAAAKAAUAAQACAAIAAAAKAAYAAQACAAIAAAAKAAcAAQACAAEAAAALAAEAAQABAAIAAAALAAIAAQABAAIAAAALAAMAAQABAAIAAAALAAQAAQABAAIAAAALAAUAAQABAAIAAAALAAYAAQABAAIAAAALAAcAAQAIAAIAAAALAAAAAQAIAAEAAAAKAAAAAQACAAMAAAAJAAAAAQACAAMAAAAIAAAAAQACAAMAAAAHAAAAAQACAAMAAAAGAAAAAQACAAMAAAAFAAAAAQACAAMAAAAEAAAAAQACAAMAAAADAAAAAQACAAMAAAACAAAAAQACAAMAAAABAAAAAQACAAMAAAAAAAAAAQAHAAEAAAA=")
 tile_set = SubResource("TileSet_07lm3")
 
-[node name="Background" type="TileMapLayer" parent="."]
+[node name="Background" type="TileMapLayer" parent="Graphics"]
 tile_map_data = PackedByteArray("AAAIAAYAAQACAAkAAAAIAAUAAQACAAgAAAAIAAQAAQACAAgAAAAIAAMAAQACAAgAAAAIAAIAAQACAAgAAAAIAAEAAQACAAcAAAAHAAYAAQACAAkAAAAHAAUAAQACAAgAAAAHAAQAAQACAAgAAAAHAAMAAQACAAgAAAAHAAIAAQACAAgAAAAHAAEAAQACAAcAAAAGAAYAAQACAAkAAAAGAAUAAQACAAgAAAAGAAQAAQACAAgAAAAGAAMAAQACAAgAAAAGAAIAAQACAAgAAAAGAAEAAQACAAcAAAAFAAYAAQACAAkAAAAFAAUAAQACAAgAAAAFAAQAAQACAAgAAAAFAAMAAQACAAgAAAAFAAIAAQACAAgAAAAFAAEAAQACAAcAAAAEAAYAAQACAAkAAAAEAAUAAQACAAgAAAAEAAQAAQACAAgAAAAEAAMAAQACAAgAAAAEAAIAAQACAAgAAAAEAAEAAQACAAcAAAADAAYAAQACAAkAAAADAAUAAQACAAgAAAADAAQAAQACAAgAAAADAAMAAQACAAgAAAADAAIAAQACAAgAAAADAAEAAQACAAcAAAACAAYAAQACAAkAAAACAAUAAQACAAgAAAACAAQAAQACAAgAAAACAAMAAQACAAgAAAACAAIAAQACAAgAAAACAAEAAQACAAcAAAABAAYAAQABAAkAAAABAAUAAQABAAgAAAABAAQAAQABAAgAAAABAAMAAQABAAgAAAABAAIAAQABAAgAAAABAAEAAQABAAcAAAAKAAUAAQADAAgAAAAKAAQAAQADAAgAAAAKAAMAAQADAAgAAAAKAAIAAQADAAgAAAAKAAEAAQADAAcAAAAJAAUAAQACAAgAAAAJAAQAAQACAAgAAAAJAAMAAQACAAgAAAAJAAIAAQACAAgAAAAJAAEAAQACAAcAAAAKAAYAAQADAAkAAAAJAAYAAQACAAkAAAA=")
 tile_set = SubResource("TileSet_wijl4")
 
-[node name="ForePlatform" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAABAAQAAQACAAIAAAACAAQAAQADAAIAAAADAAQAAQAEAAIAAAAEAAUAAQAFAAIAAAA=")
-tile_set = SubResource("TileSet_urblq")
-
-[node name="Decor" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAACAAIAAQAEAAMAAAACAAMAAQAEAAQAAAADAAIAAQAFAAMAAAADAAMAAQAFAAQAAAA=")
+[node name="Decor" type="TileMapLayer" parent="Graphics"]
+position = Vector2(2, 0)
+tile_map_data = PackedByteArray("AAACAAYAAQACAAIAAAADAAYAAQADAAIAAAAEAAYAAQAEAAIAAAA=")
 tile_set = SubResource("TileSet_p5pve")
 
-[node name="SceneDoor" parent="." instance=ExtResource("3_5wxai")]
-position = Vector2(288, 196)
-path = "uid://cq84o7wmvd1lk"
-entry_point = "EndEntry"
+[node name="Door" type="Sprite2D" parent="Graphics"]
+position = Vector2(113, 165)
+texture = ExtResource("5_6qcwj")
 
-[node name="StartEntry" type="Marker2D" parent="."]
-position = Vector2(288, 224)
-script = ExtResource("4_igs0g")
-direction = -1
-metadata/_custom_type_script = "uid://8qbpjjrlnw3l"
+[node name="PlayerAnim" type="AnimatedSprite2D" parent="Graphics"]
+position = Vector2(123, 178)
+sprite_frames = SubResource("SpriteFrames_126hm")
+autoplay = "default"
+frame_progress = 0.0809847
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 39.0
+offset_bottom = 62.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.964706, 0.760784, 0.490196, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/shadow_outline_size = 6
+theme_override_font_sizes/font_size = 46
+text = "国王归来"
+horizontal_alignment = 1
+
+[node name="V" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 246.0
+offset_top = 118.0
+offset_right = 324.0
+offset_bottom = 219.0
+
+[node name="NewGame" type="Button" parent="V"]
+layout_mode = 2
+text = "新的冒险"
+
+[node name="LoadGame" type="Button" parent="V"]
+layout_mode = 2
+text = "旧的回忆
+"
+
+[node name="ExitGame" type="Button" parent="V"]
+layout_mode = 2
+text = "离开游戏"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_sfunj")
+}
+autoplay = "enter"
+
+[connection signal="pressed" from="V/NewGame" to="." method="_on_new_game_pressed"]
+[connection signal="pressed" from="V/LoadGame" to="." method="_on_load_game_pressed"]
+[connection signal="pressed" from="V/ExitGame" to="." method="_on_exit_game_pressed"]

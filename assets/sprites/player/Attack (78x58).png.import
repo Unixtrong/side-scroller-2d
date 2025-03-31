@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cijyxcnlpspxa"
-path="res://.godot/imported/Fall (78x58).png-311482daba763086de4c1e6a40de65bf.ctex"
+uid="uid://q4jhkkf7fwya"
+path="res://.godot/imported/Attack (78x58).png-e15eee27abfd1f967915782b9b220193.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Fall (78x58).png"
-dest_files=["res://.godot/imported/Fall (78x58).png-311482daba763086de4c1e6a40de65bf.ctex"]
+source_file="res://assets/sprites/player/Attack (78x58).png"
+dest_files=["res://.godot/imported/Attack (78x58).png-e15eee27abfd1f967915782b9b220193.ctex"]
 
 [params]
 

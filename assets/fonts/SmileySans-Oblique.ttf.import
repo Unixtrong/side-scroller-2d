@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://c2u4g781p7m6f"
-path="res://.godot/imported/VonwaonBitmap-16pxLite.ttf-d35011e1c69ad974270d389c9be83e8c.fontdata"
+uid="uid://dcmsc5loam18l"
+path="res://.godot/imported/SmileySans-Oblique.ttf-54883dbd94ac421e47047b7755eef55a.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/VonwaonBitmap-16pxLite.ttf"
-dest_files=["res://.godot/imported/VonwaonBitmap-16pxLite.ttf-d35011e1c69ad974270d389c9be83e8c.fontdata"]
+source_file="res://assets/fonts/SmileySans-Oblique.ttf"
+dest_files=["res://.godot/imported/SmileySans-Oblique.ttf-54883dbd94ac421e47047b7755eef55a.fontdata"]
 
 [params]
 

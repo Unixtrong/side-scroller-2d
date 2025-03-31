@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dm7bylsgbi0e"
-path="res://.godot/imported/Ground (78x58).png-7a9de77eb71bfdc2cd0724f46dc5ad17.ctex"
+uid="uid://cr0iv64utohl7"
+path="res://.godot/imported/Terrain (32x32).png-39ff46ded5cd752e1ecbb09d9ada48e4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Ground (78x58).png"
-dest_files=["res://.godot/imported/Ground (78x58).png-7a9de77eb71bfdc2cd0724f46dc5ad17.ctex"]
+source_file="res://assets/sprites/tile_sets/Terrain (32x32).png"
+dest_files=["res://.godot/imported/Terrain (32x32).png-39ff46ded5cd752e1ecbb09d9ada48e4.ctex"]
 
 [params]
 

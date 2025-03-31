@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bxj80r6kebn0t"
-path="res://.godot/imported/Run (78x58).png-fcf9b5397882a7ed0c8e922a8d42b665.ctex"
+uid="uid://dier8h38ajvu"
+path="res://.godot/imported/Door In (78x58).png-a592a22e6bf276fc04fd3efaae6dcd6f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Run (78x58).png"
-dest_files=["res://.godot/imported/Run (78x58).png-fcf9b5397882a7ed0c8e922a8d42b665.ctex"]
+source_file="res://assets/sprites/player/Door In (78x58).png"
+dest_files=["res://.godot/imported/Door In (78x58).png-a592a22e6bf276fc04fd3efaae6dcd6f.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://7ysrwo26awn4"]
 
 [ext_resource type="Script" uid="uid://cpa71l78lc6uu" path="res://objects/save_point.gd" id="1_yex63"]
-[ext_resource type="Texture2D" uid="uid://dm7bylsgbi0e" path="res://art/KingsAndPigs/Sprites/01-King Human/Ground (78x58).png" id="2_g3g0p"]
+[ext_resource type="Texture2D" uid="uid://dm7bylsgbi0e" path="res://assets/sprites/player/Ground (78x58).png" id="2_g3g0p"]
 [ext_resource type="Texture2D" uid="uid://jtwgvss607ga" path="res://art/KingsAndPigs/Sprites/08-Box/Idle.png" id="3_o14gd"]
 [ext_resource type="Texture2D" uid="uid://dt3e5vtdyc4ir" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/Hi In (24x8).png" id="4_qbojg"]
 

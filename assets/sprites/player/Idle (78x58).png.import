@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c86ore0d5c2jx"
-path="res://.godot/imported/Hit (78x58).png-c90245c6362e041d84d95ddb061eddce.ctex"
+uid="uid://bvg457udowh4a"
+path="res://.godot/imported/Idle (78x58).png-be7fdda1a2f868e8354b0b6b7fd16854.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Hit (78x58).png"
-dest_files=["res://.godot/imported/Hit (78x58).png-c90245c6362e041d84d95ddb061eddce.ctex"]
+source_file="res://assets/sprites/player/Idle (78x58).png"
+dest_files=["res://.godot/imported/Idle (78x58).png-be7fdda1a2f868e8354b0b6b7fd16854.ctex"]
 
 [params]
 

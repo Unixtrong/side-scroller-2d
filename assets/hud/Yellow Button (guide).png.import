@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvg457udowh4a"
-path="res://.godot/imported/Idle (78x58).png-9696c4d867529754bb9a3f1de8133afe.ctex"
+uid="uid://otymxgejiu48"
+path="res://.godot/imported/Yellow Button (guide).png-22e65d0312ab9423265c313cef6c4a39.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Idle (78x58).png"
-dest_files=["res://.godot/imported/Idle (78x58).png-9696c4d867529754bb9a3f1de8133afe.ctex"]
+source_file="res://assets/hud/Yellow Button (guide).png"
+dest_files=["res://.godot/imported/Yellow Button (guide).png-22e65d0312ab9423265c313cef6c4a39.ctex"]
 
 [params]
 

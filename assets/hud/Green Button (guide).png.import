@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dsx4dcok6xu34"
-path="res://.godot/imported/Decorations (32x32).png-2ddbe430e0488936d7e1cd6089420ed2.ctex"
+uid="uid://f6mng53y0wgs"
+path="res://.godot/imported/Green Button (guide).png-f66b9ee7e741e484cb0fea732f69bc17.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/14-TileSets/Decorations (32x32).png"
-dest_files=["res://.godot/imported/Decorations (32x32).png-2ddbe430e0488936d7e1cd6089420ed2.ctex"]
+source_file="res://assets/hud/Green Button (guide).png"
+dest_files=["res://.godot/imported/Green Button (guide).png-f66b9ee7e741e484cb0fea732f69bc17.ctex"]
 
 [params]
 

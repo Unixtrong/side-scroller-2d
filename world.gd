@@ -1,3 +1,4 @@
+class_name World
 extends Node2D
 
 
@@ -26,6 +27,11 @@ func _ready() -> void:
 	camera_2d.reset_smoothing()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		Game.back_to_title()
+
+
 func spawn_pig():
 	var new_pig = pig_scene.instantiate()
 	new_pig.position = spawn_position
@@ -43,7 +49,7 @@ func from_dict(dict: Dictionary) -> void:
 	# 获取所有敌人分组内的节点
 	for node in get_tree().get_nodes_in_group("enemies"):
 		# 获取当前节点（World）到 node 的相对路径
-		var path := get_path_to(node)
+		var path := get_path_to(node) as String
 		# 如果敌人路径不在保存的字典内，删除该敌人
 		if path not in dict.enemies_alive:
 			node.queue_free()

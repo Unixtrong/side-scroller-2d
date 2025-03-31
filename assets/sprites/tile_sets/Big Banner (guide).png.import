@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cetkpoqflf4as"
-path="res://.godot/imported/Dead (78x58).png-55c94e4925403ae106dd33ce05a65ec3.ctex"
+uid="uid://c4iwjblica8c1"
+path="res://.godot/imported/Big Banner (guide).png-b874c7996d96a82c8db577e9691ec36f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/KingsAndPigs/Sprites/01-King Human/Dead (78x58).png"
-dest_files=["res://.godot/imported/Dead (78x58).png-55c94e4925403ae106dd33ce05a65ec3.ctex"]
+source_file="res://assets/sprites/tile_sets/Big Banner (guide).png"
+dest_files=["res://.godot/imported/Big Banner (guide).png-b874c7996d96a82c8db577e9691ec36f.ctex"]
 
 [params]
 
