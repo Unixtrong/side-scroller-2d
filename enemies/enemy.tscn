@@ -26,6 +26,7 @@ metadata/_custom_type_script = "uid://cxn8xvygr8tum"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
 
 [node name="FreeTimer" type="Timer" parent="."]
 wait_time = 3.0

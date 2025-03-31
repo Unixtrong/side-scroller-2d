@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq84o7wmvd1lk"]
+[gd_scene load_steps=7 format=3 uid="uid://cq84o7wmvd1lk"]
 
 [ext_resource type="PackedScene" uid="uid://bvkd8b2dqhcma" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b7ddvldpayxoi" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://sm3psxmopkc0" path="res://map_1.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://btlw028uuacli" path="res://enemies/pig.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://7ysrwo26awn4" path="res://objects/save_point.tscn" id="5_e6hjw"]
 [ext_resource type="Script" uid="uid://8qbpjjrlnw3l" path="res://classes/EntryPoint.gd" id="5_gbfbk"]
 
 [node name="World" type="Node2D"]
@@ -17,6 +18,9 @@ spawn_position = Vector2(608, 154)
 position = Vector2(152, 224)
 script = ExtResource("5_gbfbk")
 metadata/_custom_type_script = "uid://8qbpjjrlnw3l"
+
+[node name="SavePoint" parent="TileMap2D" instance=ExtResource("5_e6hjw")]
+position = Vector2(688, 192)
 
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
 position = Vector2(104, 121)

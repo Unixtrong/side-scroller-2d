@@ -1143,6 +1143,7 @@ position = Vector2(0, -26)
 shape = SubResource("CapsuleShape2D_4flbx")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
 libraries = {
 &"": SubResource("AnimationLibrary_i3pqv")
 }
@@ -1168,6 +1169,7 @@ script = ExtResource("5_sweqy")
 metadata/_custom_type_script = "uid://bhvfxmsj7fely"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 20
 
 [node name="StatusPanel" parent="CanvasLayer" instance=ExtResource("15_606se")]
 offset_left = 20.0

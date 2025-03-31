@@ -1,0 +1,204 @@
+[gd_scene load_steps=17 format=3 uid="uid://7ysrwo26awn4"]
+
+[ext_resource type="Script" uid="uid://cpa71l78lc6uu" path="res://objects/save_point.gd" id="1_yex63"]
+[ext_resource type="Texture2D" uid="uid://dm7bylsgbi0e" path="res://art/KingsAndPigs/Sprites/01-King Human/Ground (78x58).png" id="2_g3g0p"]
+[ext_resource type="Texture2D" uid="uid://jtwgvss607ga" path="res://art/KingsAndPigs/Sprites/08-Box/Idle.png" id="3_o14gd"]
+[ext_resource type="Texture2D" uid="uid://dt3e5vtdyc4ir" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/Hi In (24x8).png" id="4_qbojg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vluiw"]
+size = Vector2(21, 21)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_osm7r"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6upbs"]
+atlas = ExtResource("4_qbojg")
+region = Rect2(0, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2vkt"]
+atlas = ExtResource("4_qbojg")
+region = Rect2(34, 0, 34, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ej6cw"]
+atlas = ExtResource("4_qbojg")
+region = Rect2(68, 0, 34, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7aetd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6upbs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2vkt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ej6cw")
+}],
+"loop": true,
+"name": &"default",
+"speed": 3.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_w01jk"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nki4h"]
+gradient = SubResource("Gradient_w01jk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="Animation" id="Animation_sx6hc"]
+resource_name = "ready"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cbjgj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.2]
+}
+
+[sub_resource type="Animation" id="Animation_dtx7y"]
+resource_name = "activated"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:enabled")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:energy")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.6, 0.3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f4r32"]
+_data = {
+&"RESET": SubResource("Animation_cbjgj"),
+&"activated": SubResource("Animation_dtx7y"),
+&"ready": SubResource("Animation_sx6hc")
+}
+
+[node name="SavePoint" type="Area2D"]
+script = ExtResource("1_yex63")
+metadata/_custom_type_script = "uid://dimqyd8dhjh2k"
+
+[node name="Crown" type="Sprite2D" parent="."]
+position = Vector2(-1, -17)
+texture = ExtResource("2_g3g0p")
+region_enabled = true
+region_rect = Rect2(20, 20, 23, 8)
+
+[node name="Idle" type="Sprite2D" parent="."]
+position = Vector2(0, -8)
+texture = ExtResource("3_o14gd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(-0.5, -10.5)
+shape = SubResource("RectangleShape2D_vluiw")
+
+[node name="HiBubble" type="AnimatedSprite2D" parent="."]
+material = SubResource("CanvasItemMaterial_osm7r")
+position = Vector2(4, -31)
+sprite_frames = SubResource("SpriteFrames_7aetd")
+autoplay = "default"
+frame_progress = 0.858258
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -18)
+enabled = false
+color = Color(0.93, 0.85932, 0.3999, 1)
+energy = 1.2
+texture = SubResource("GradientTexture2D_nki4h")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+callback_mode_process = 0
+libraries = {
+&"": SubResource("AnimationLibrary_f4r32")
+}

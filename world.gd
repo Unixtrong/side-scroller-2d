@@ -63,7 +63,8 @@ func to_dict() -> Dictionary:
 	}
 
 
-func update_player(position: Vector2, direction: Player.Direction) -> void:
-	player.global_position = position
+func update_player(pos: Vector2, direction: Player.Direction) -> void:
+	player.global_position = pos
+	player.direction = direction
 	camera_2d.reset_smoothing()
 	camera_2d.force_update_scroll()
