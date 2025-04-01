@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bvkd8b2dqhcma"]
+[gd_scene load_steps=35 format=3 uid="uid://bvkd8b2dqhcma"]
 
 [ext_resource type="Script" uid="uid://c8bvkmps32w7r" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://assets/sprites/player/Idle (78x58).png" id="2_onrkg"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c86ore0d5c2jx" path="res://assets/sprites/player/Hit (78x58).png" id="11_urp6f"]
 [ext_resource type="Texture2D" uid="uid://cetkpoqflf4as" path="res://assets/sprites/player/Dead (78x58).png" id="12_bwjto"]
 [ext_resource type="PackedScene" uid="uid://dathxnywliihx" path="res://ui/status_panel.tscn" id="15_606se"]
+[ext_resource type="PackedScene" uid="uid://f7onxbug5847" path="res://ui/game_over_screen.tscn" id="16_op7ga"]
 [ext_resource type="Texture2D" uid="uid://byd0urt5rldir" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/Interrogation In (24x8).png" id="16_u1c27"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nvl01"]
@@ -302,7 +303,7 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
-"method": &"count_donw_reset_world"
+"method": &"die_delay"
 }]
 }
 tracks/6/type = "value"
@@ -1160,7 +1161,7 @@ one_shot = true
 wait_time = 2.0
 one_shot = true
 
-[node name="ResetWorldTimer" type="Timer" parent="."]
+[node name="DieDelayTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
 
@@ -1176,6 +1177,8 @@ offset_left = 20.0
 offset_top = 20.0
 offset_bottom = 46.0
 
+[node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("16_op7ga")]
+
 [node name="InteractionIcon" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -54)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
@@ -1183,4 +1186,4 @@ autoplay = "default"
 frame_progress = 0.0861324
 
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]
-[connection signal="timeout" from="ResetWorldTimer" to="." method="_on_reset_world_timer_timeout"]
+[connection signal="timeout" from="DieDelayTimer" to="." method="_on_die_delay_timer_timeout"]

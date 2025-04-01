@@ -9,7 +9,6 @@ script = ExtResource("1_qdmn5")
 
 [node name="PlayerStats" type="Node" parent="."]
 script = ExtResource("2_j4t3q")
-max_health = 10
 metadata/_custom_type_script = "uid://c6oaj16n3rokm"
 
 [node name="ColorRect" type="ColorRect" parent="."]

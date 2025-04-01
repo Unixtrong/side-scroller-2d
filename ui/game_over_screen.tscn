@@ -1,0 +1,51 @@
+[gd_scene load_steps=4 format=3 uid="uid://f7onxbug5847"]
+
+[ext_resource type="FontFile" uid="uid://dcmsc5loam18l" path="res://assets/fonts/SmileySans-Oblique.ttf" id="1_dcpkc"]
+[ext_resource type="Script" uid="uid://bfnlo3dsd0ey4" path="res://ui/game_over_screen.gd" id="1_pmiq4"]
+[ext_resource type="Theme" uid="uid://b5552gr7ldimv" path="res://ui/main_theme.tres" id="3_e20le"]
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pmiq4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.960784)
+
+[node name="V" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="GameOverLabel" type="Label" parent="V"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.82, 0.205, 0.205, 1)
+theme_override_colors/font_shadow_color = Color(0.5, 0.085, 0.085, 1)
+theme_override_fonts/font = ExtResource("1_dcpkc")
+theme_override_font_sizes/font_size = 46
+text = "游戏结束"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnyKeyLabel" type="Label" parent="V"]
+layout_mode = 2
+theme = ExtResource("3_e20le")
+theme_override_colors/font_color = Color(1, 1, 1, 0.509804)
+theme_override_font_sizes/font_size = 12
+text = "按下任意键继续…"
+horizontal_alignment = 1

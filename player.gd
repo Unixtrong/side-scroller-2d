@@ -56,13 +56,13 @@ var interacting_with: Array[Interactable]
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var jump_request_timer: Timer = $JumpRequestTimer
 @onready var invincible_timer: Timer = $InvincibleTimer
-@onready var reset_world_timer: Timer = $ResetWorldTimer
+@onready var die_delay_timer: Timer = $DieDelayTimer
 @onready var hammer_checker: RayCast2D = $Graphics/HammerChecker
 @onready var foot_checker: RayCast2D = $Graphics/FootChecker
 @onready var state_machine: StateMachine = $StateMachine
 @onready var stats: Stats = Game.player_stats
 @onready var interaction_icon: AnimatedSprite2D = $InteractionIcon
-
+@onready var game_over_screen: Control = $CanvasLayer/GameOverScreen
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -153,7 +153,12 @@ func unregister_interactable(v: Interactable) -> void:
 
 
 func can_wall_slide(direction: float) -> bool:
-	return is_on_wall() and not is_zero_approx(direction) and hammer_checker.is_colliding() and foot_checker.is_colliding()
+	return (
+		is_on_wall() and
+		not is_zero_approx(direction) and
+		hammer_checker.is_colliding() and
+		foot_checker.is_colliding()
+	)
 
 func get_next_state(state: State) -> State:
 	if stats.health == 0:
@@ -293,11 +298,12 @@ func transition_state(from: State, to: State) -> void:
 
 
 func die() -> void:
+	#game_over_screen.show_game_over()
 	pass
 
 
-func count_donw_reset_world() -> void:
-	reset_world_timer.start()
+func die_delay() -> void:
+	die_delay_timer.start()
 
 
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
@@ -309,6 +315,7 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	pending_damage.source = hitbox.owner
 
 
-func _on_reset_world_timer_timeout() -> void:
-	Game.player_stats.health = Game.player_stats.max_health
-	get_tree().reload_current_scene()
+func _on_die_delay_timer_timeout() -> void:
+	#Game.player_stats.health = Game.player_stats.max_health
+	#get_tree().reload_current_scene()
+	game_over_screen.show_game_over()
