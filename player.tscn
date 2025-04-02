@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bvkd8b2dqhcma"]
+[gd_scene load_steps=36 format=3 uid="uid://bvkd8b2dqhcma"]
 
 [ext_resource type="Script" uid="uid://c8bvkmps32w7r" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://assets/sprites/player/Idle (78x58).png" id="2_onrkg"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://cetkpoqflf4as" path="res://assets/sprites/player/Dead (78x58).png" id="12_bwjto"]
 [ext_resource type="PackedScene" uid="uid://dathxnywliihx" path="res://ui/status_panel.tscn" id="15_606se"]
 [ext_resource type="PackedScene" uid="uid://f7onxbug5847" path="res://ui/game_over_screen.tscn" id="16_op7ga"]
+[ext_resource type="PackedScene" uid="uid://bxv66p8irb53f" path="res://ui/pause_screen.tscn" id="16_q13i1"]
 [ext_resource type="Texture2D" uid="uid://byd0urt5rldir" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/Interrogation In (24x8).png" id="16_u1c27"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nvl01"]
@@ -1178,6 +1179,8 @@ offset_top = 20.0
 offset_bottom = 46.0
 
 [node name="GameOverScreen" parent="CanvasLayer" instance=ExtResource("16_op7ga")]
+
+[node name="PauseScreen" parent="CanvasLayer" instance=ExtResource("16_q13i1")]
 
 [node name="InteractionIcon" type="AnimatedSprite2D" parent="."]
 position = Vector2(3, -54)

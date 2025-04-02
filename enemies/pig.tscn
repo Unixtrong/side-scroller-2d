@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://btlw028uuacli"]
+[gd_scene load_steps=24 format=3 uid="uid://btlw028uuacli"]
 
 [ext_resource type="PackedScene" uid="uid://yg1tmn5xucab" path="res://enemies/enemy.tscn" id="1_gm6cv"]
 [ext_resource type="Texture2D" uid="uid://dk4as0khlbpqv" path="res://art/KingsAndPigs/Sprites/03-Pig/Idle (34x28).png" id="2_b7d6g"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://c6oaj16n3rokm" path="res://classes/Stats.gd" id="7_2y6nl"]
 [ext_resource type="Texture2D" uid="uid://dh1xcbevlbeqg" path="res://art/KingsAndPigs/Sprites/03-Pig/Dead (34x28).png" id="7_5cov1"]
 [ext_resource type="Texture2D" uid="uid://c61krjn44l7fv" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/!!! In (24x8).png" id="8_n51ks"]
+[ext_resource type="AudioStream" uid="uid://dno3dhd5ytoqd" path="res://assets/SFX/23_orc_jump_land.wav" id="10_38qkp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2uym"]
 size = Vector2(20, 15)
@@ -663,5 +664,8 @@ one_shot = true
 script = ExtResource("7_2y6nl")
 max_health = 5
 metadata/_custom_type_script = "uid://c6oaj16n3rokm"
+
+[node name="AudioDie" type="AudioStreamPlayer" parent="." index="9"]
+stream = ExtResource("10_38qkp")
 
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]

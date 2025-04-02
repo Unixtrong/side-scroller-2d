@@ -11,7 +11,7 @@ script = ExtResource("1_qdmn5")
 script = ExtResource("2_j4t3q")
 metadata/_custom_type_script = "uid://c6oaj16n3rokm"
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="SceneTransitionRect" type="ColorRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

@@ -1,8 +1,11 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://b5552gr7ldimv"]
+[gd_resource type="Theme" load_steps=16 format=3 uid="uid://b5552gr7ldimv"]
 
 [ext_resource type="FontFile" uid="uid://dcmsc5loam18l" path="res://assets/fonts/SmileySans-Oblique.ttf" id="1_g1fjd"]
 [ext_resource type="Texture2D" uid="uid://otymxgejiu48" path="res://assets/hud/Yellow Button (guide).png" id="2_6tukj"]
 [ext_resource type="Texture2D" uid="uid://f6mng53y0wgs" path="res://assets/hud/Green Button (guide).png" id="3_3xb56"]
+[ext_resource type="Texture2D" uid="uid://dafdhetmu8w20" path="res://assets/hud/slider/slider.png" id="4_joxlk"]
+[ext_resource type="Texture2D" uid="uid://bk66488gvsv4i" path="res://assets/hud/slider/grabber.png" id="4_lsmgg"]
+[ext_resource type="Texture2D" uid="uid://djxl0wdhupdne" path="res://assets/hud/Yellow Board (guide).png" id="6_11ing"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_joxlk"]
 texture = ExtResource("2_6tukj")
@@ -38,6 +41,37 @@ texture_margin_bottom = 5.0
 region_rect = Rect2(0, 0, 14, 14)
 modulate_color = Color(0.703968, 0.693163, 0.68852, 1)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_11ing"]
+atlas = ExtResource("4_lsmgg")
+region = Rect2(0, 1, 12, 11)
+margin = Rect2(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_47as2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5itkh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_11ing"]
+texture = ExtResource("4_joxlk")
+texture_margin_left = 3.0
+texture_margin_top = 3.0
+texture_margin_right = 3.0
+texture_margin_bottom = 3.0
+region_rect = Rect2(0, 3, 30, 6)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_47as2"]
+content_margin_left = 16.0
+content_margin_top = 12.0
+content_margin_right = 16.0
+content_margin_bottom = 12.0
+texture = ExtResource("6_11ing")
+texture_margin_left = 20.0
+texture_margin_top = 11.0
+texture_margin_right = 20.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
+region_rect = Rect2(97, 95, 28, 32)
+
 [resource]
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_disabled_color = Color(0, 0, 0, 0.501961)
@@ -61,4 +95,12 @@ Button/styles/focus = SubResource("StyleBoxTexture_lsmgg")
 Button/styles/hover = SubResource("StyleBoxTexture_3xb56")
 Button/styles/normal = SubResource("StyleBoxTexture_3xb56")
 Button/styles/pressed = SubResource("StyleBoxTexture_6tukj")
+HSlider/icons/grabber = SubResource("AtlasTexture_11ing")
+HSlider/icons/grabber_disabled = SubResource("AtlasTexture_11ing")
+HSlider/icons/grabber_highlight = SubResource("AtlasTexture_11ing")
+HSlider/styles/grabber_area = SubResource("StyleBoxEmpty_47as2")
+HSlider/styles/grabber_area_highlight = SubResource("StyleBoxEmpty_5itkh")
+HSlider/styles/slider = SubResource("StyleBoxTexture_11ing")
+Label/colors/font_shadow_color = Color(0, 0, 0, 0.611765)
 Label/fonts/font = ExtResource("1_g1fjd")
+PanelContainer/styles/panel = SubResource("StyleBoxTexture_47as2")

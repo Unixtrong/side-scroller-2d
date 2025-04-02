@@ -63,6 +63,7 @@ var interacting_with: Array[Interactable]
 @onready var stats: Stats = Game.player_stats
 @onready var interaction_icon: AnimatedSprite2D = $InteractionIcon
 @onready var game_over_screen: Control = $CanvasLayer/GameOverScreen
+@onready var pause_screen: Control = $CanvasLayer/PauseScreen
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -74,6 +75,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			velocity.y = JUMP_VELOCITY / 2
 	if event.is_action_pressed("interact") and not interacting_with.is_empty():
 		interacting_with.back().interact()
+	if event.is_action_pressed("pause"):
+		pause_screen.show_pause()
 
 
 func tick_physics(state: State, delta: float) -> void:
@@ -253,6 +256,7 @@ func transition_state(from: State, to: State) -> void:
 			velocity.y = JUMP_VELOCITY
 			coyote_timer.stop()
 			jump_request_timer.stop()
+			SoundManager.play_sfx("Jump")
 
 		State.FALL:
 			animation_player.play("fall")
@@ -274,9 +278,11 @@ func transition_state(from: State, to: State) -> void:
 
 		State.ATTACK:
 			animation_player.play("attack")
+			SoundManager.play_sfx("Attack")
 
 		State.HURT:
 			animation_player.play("hurt")
+			SoundManager.play_sfx("Hurt")
 			# 掉血
 			stats.health -= pending_damage.amount
 			# 计算击退方向
@@ -293,6 +299,7 @@ func transition_state(from: State, to: State) -> void:
 			animation_player.play("die")
 			invincible_timer.stop()
 			interacting_with.clear()
+			SoundManager.play_sfx("Die")
 	
 	is_first_tick = true
 

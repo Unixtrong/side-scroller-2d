@@ -2,13 +2,14 @@ class_name World
 extends Node2D
 
 
+@export var pig_scene: PackedScene  # 预制体
+@export var spawn_position: Vector2  # 生成位置
+@export var bgm: AudioStream
+
+
 @onready var tile_map_2d: Node2D = $TileMap2D
 @onready var camera_2d: Camera2D = $Player/Camera2D
 @onready var player: Player = $Player
-
-
-@export var pig_scene: PackedScene  # 预制体
-@export var spawn_position: Vector2  # 生成位置
 
 
 func _ready() -> void:
@@ -25,11 +26,9 @@ func _ready() -> void:
 	camera_2d.limit_bottom = used.end.y * tile_size.y
 	# 禁止游戏开始时镜头应用 limit 时的动画
 	camera_2d.reset_smoothing()
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("menu"):
-		Game.back_to_title()
+	
+	if bgm:
+		SoundManager.play_bgm(bgm)
 
 
 func spawn_pig():

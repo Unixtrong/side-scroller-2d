@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dfht81me0ls8o"
+path="res://.godot/imported/40 21 marching LOOP.mp3-d36d52dce880d5a249a1b3b795a94714.mp3str"
+
+[deps]
+
+source_file="res://assets/BGM/40 21 marching LOOP.mp3"
+dest_files=["res://.godot/imported/40 21 marching LOOP.mp3-d36d52dce880d5a249a1b3b795a94714.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

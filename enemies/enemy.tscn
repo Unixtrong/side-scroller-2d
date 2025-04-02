@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://yg1tmn5xucab"]
+[gd_scene load_steps=6 format=3 uid="uid://yg1tmn5xucab"]
 
 [ext_resource type="Script" uid="uid://b4l703brdfdsn" path="res://enemies/enemy.gd" id="1_fw1ev"]
 [ext_resource type="Script" uid="uid://bhvfxmsj7fely" path="res://classes/StateMachine.gd" id="2_7frlh"]
 [ext_resource type="Script" uid="uid://bp5qlq201qivk" path="res://classes/Hitbox.gd" id="2_orwns"]
 [ext_resource type="Script" uid="uid://cxn8xvygr8tum" path="res://classes/Hurtbox.gd" id="3_a6vjd"]
+[ext_resource type="AudioStream" uid="uid://rjjhava3a2qy" path="res://assets/SFX/21_orc_damage_1.wav" id="5_07tka"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -35,5 +36,8 @@ one_shot = true
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("2_7frlh")
 metadata/_custom_type_script = "uid://bhvfxmsj7fely"
+
+[node name="AudioHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_07tka")
 
 [connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=28 format=4 uid="uid://c22u3nec4bqa6"]
+[gd_scene load_steps=29 format=4 uid="uid://c22u3nec4bqa6"]
 
 [ext_resource type="Theme" uid="uid://b5552gr7ldimv" path="res://ui/main_theme.tres" id="1_bor1v"]
 [ext_resource type="Script" uid="uid://d34ukp7y06hth" path="res://ui/title_screen.gd" id="2_bor1v"]
 [ext_resource type="Texture2D" uid="uid://cr0iv64utohl7" path="res://assets/sprites/tile_sets/Terrain (32x32).png" id="3_l1ku3"]
+[ext_resource type="AudioStream" uid="uid://yf0tj45kkxgb" path="res://assets/BGM/19 10 world map LOOP.mp3" id="3_wa5rm"]
 [ext_resource type="Texture2D" uid="uid://dsx4dcok6xu34" path="res://assets/sprites/tile_sets/Decorations (32x32).png" id="4_6qcwj"]
 [ext_resource type="Texture2D" uid="uid://bubadihpbg862" path="res://art/KingsAndPigs/Sprites/11-Door/Idle.png" id="5_6qcwj"]
 [ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://assets/sprites/player/Idle (78x58).png" id="5_wa5rm"]
@@ -563,6 +564,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_bor1v")
 script = ExtResource("2_bor1v")
+bgm = ExtResource("3_wa5rm")
 
 [node name="Graphics" type="Node2D" parent="."]
 

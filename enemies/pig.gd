@@ -20,6 +20,7 @@ var pending_damage: Damage
 @onready var floor_checker: RayCast2D = $Graphics/FloorChecker
 @onready var calm_down_timer: Timer = $CalmDownTimer
 @onready var attention_anim: AnimatedSprite2D = $AttentionAnimation
+@onready var audio_die: AudioStreamPlayer = $AudioDie
 
 
 func tick_physics(state: State, delta: float) -> void:
@@ -107,6 +108,7 @@ func transition_state(from: State, to: State) -> void:
 		State.HURT:
 			animation_player.speed_scale = 1.0
 			animation_player.play("hit")
+			audio_hit.play()
 			# 掉血
 			stats.health -= pending_damage.amount
 			# 计算击退方向
@@ -126,6 +128,7 @@ func transition_state(from: State, to: State) -> void:
 		State.DYING:
 			animation_player.speed_scale = 1.0
 			animation_player.play("die")
+			audio_die.play()
 
 
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:

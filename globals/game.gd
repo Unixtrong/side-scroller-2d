@@ -2,6 +2,7 @@ extends Node
 
 
 const SAVE_PATH := "user://store.sav"
+const CONFIG_PATH := "user://config.ini"
 
 # 游戏场景状态 => {
 #   enemies_alive = [ 敌人路径 ]
@@ -9,8 +10,13 @@ const SAVE_PATH := "user://store.sav"
 var world_states := {}
 
 @onready var player_stats: Stats = $PlayerStats
-@onready var color_rect: ColorRect = $ColorRect
+@onready var scene_transition_rect: ColorRect = $SceneTransitionRect
 @onready var default_player_stats := player_stats.to_dict()
+
+
+func _ready() -> void:
+	scene_transition_rect.color.a = 0
+	load_config()
 
 
 # 切换游戏场景
@@ -21,7 +27,7 @@ func change_scene(path: String, params := {}) -> void:
 	# 播放黑屏动画
 	var tween := create_tween()
 	tween.set_pause_mode(Tween.TWEEN_PAUSE_PROCESS)
-	tween.tween_property(color_rect, "color:a", 1, 0.2)
+	tween.tween_property(scene_transition_rect, "color:a", 1, 0.2)
 	await tween.finished
 	
 	if tree.current_scene is World:
@@ -60,7 +66,7 @@ func change_scene(path: String, params := {}) -> void:
 
 	tree.paused = false
 	tween = create_tween()
-	tween.tween_property(color_rect, "color:a", 0, 0.2)
+	tween.tween_property(scene_transition_rect, "color:a", 0, 0.2)
 
 
 func save_game() -> void:
@@ -123,3 +129,29 @@ func back_to_title() -> void:
 # 是否有存档
 func has_save() -> bool:
 	return FileAccess.file_exists(SAVE_PATH)
+
+
+func save_config() -> void:
+	var config := ConfigFile.new()
+	config.set_value("audio", "master", SoundManager.get_volumn(SoundManager.Bus.MASTER))
+	config.set_value("audio", "sfx", SoundManager.get_volumn(SoundManager.Bus.SFX))
+	config.set_value("audio", "bgm", SoundManager.get_volumn(SoundManager.Bus.BGM))
+	config.save(CONFIG_PATH)
+
+
+func load_config() -> void:
+	var config := ConfigFile.new()
+	config.load(CONFIG_PATH)
+	
+	SoundManager.set_volumn(
+		SoundManager.Bus.MASTER,
+		config.get_value("audio", "master", 0.5)
+	)
+	SoundManager.set_volumn(
+		SoundManager.Bus.SFX,
+		config.get_value("audio", "sfx", 1.0)
+	)
+	SoundManager.set_volumn(
+		SoundManager.Bus.BGM,
+		config.get_value("audio", "bgm", 1.0)
+	)

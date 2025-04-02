@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq84o7wmvd1lk"]
+[gd_scene load_steps=8 format=3 uid="uid://cq84o7wmvd1lk"]
 
 [ext_resource type="PackedScene" uid="uid://bvkd8b2dqhcma" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b7ddvldpayxoi" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://sm3psxmopkc0" path="res://map_1.tscn" id="2_fj7yv"]
+[ext_resource type="AudioStream" uid="uid://dfht81me0ls8o" path="res://assets/BGM/40 21 marching LOOP.mp3" id="3_ua44f"]
 [ext_resource type="PackedScene" uid="uid://btlw028uuacli" path="res://enemies/pig.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://7ysrwo26awn4" path="res://objects/save_point.tscn" id="5_e6hjw"]
 [ext_resource type="Script" uid="uid://8qbpjjrlnw3l" path="res://classes/EntryPoint.gd" id="5_gbfbk"]
@@ -11,6 +12,7 @@
 script = ExtResource("1_tlwt5")
 pig_scene = ExtResource("4_aqk2v")
 spawn_position = Vector2(608, 154)
+bgm = ExtResource("3_ua44f")
 
 [node name="TileMap2D" parent="." instance=ExtResource("2_fj7yv")]
 

@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://c7dhgbhpbpvyn"]
+
+[ext_resource type="AudioStream" uid="uid://bygjnltexxupb" path="res://assets/SFX/07_human_atk_sword_1.wav" id="1_8srb7"]
+[ext_resource type="Script" uid="uid://doli3s0y88f7s" path="res://globals/sound_manager.gd" id="1_tfwxo"]
+[ext_resource type="AudioStream" uid="uid://be7hc7y8igmuh" path="res://assets/SFX/12_human_jump_2.wav" id="2_tfwxo"]
+[ext_resource type="AudioStream" uid="uid://bobrrh24vq2rs" path="res://assets/SFX/11_human_damage_1.wav" id="3_61b4e"]
+[ext_resource type="AudioStream" uid="uid://dqwaeub2y5wjk" path="res://assets/SFX/impactGlass_heavy_000.ogg" id="4_yqr7p"]
+[ext_resource type="AudioStream" uid="uid://b51yp7oww8b2y" path="res://assets/SFX/impactTin_medium_000.ogg" id="5_61b4e"]
+[ext_resource type="AudioStream" uid="uid://dhm82pv65qifq" path="res://assets/SFX/14_human_death_cut.wav" id="5_pf7bt"]
+
+[node name="SoundManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_tfwxo")
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Attack" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("1_8srb7")
+bus = &"SFX"
+
+[node name="Hurt" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("3_61b4e")
+bus = &"SFX"
+
+[node name="Jump" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("2_tfwxo")
+volume_db = -4.809
+bus = &"SFX"
+
+[node name="Die" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_pf7bt")
+volume_db = -4.809
+bus = &"SFX"
+
+[node name="UiPress" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("4_yqr7p")
+volume_db = -4.809
+bus = &"SFX"
+
+[node name="UiFocus" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("5_61b4e")
+volume_db = -4.809
+bus = &"SFX"
+
+[node name="BgmPlayer" type="AudioStreamPlayer" parent="."]
+bus = &"BGM"

@@ -1,6 +1,8 @@
 extends Control
 
 
+@export var bgm: AudioStream
+
 @onready var v: VBoxContainer = $V
 @onready var new_game: Button = $V/NewGame
 @onready var load_game: Button = $V/LoadGame
@@ -12,7 +14,9 @@ func _ready() -> void:
 	
 	for button: Button in v.get_children():
 		button.mouse_entered.connect(button.grab_focus)
-
+	
+	SoundManager.setup_ui_sounds(self)
+	SoundManager.play_bgm(bgm)
 
 func _on_new_game_pressed() -> void:
 	Game.new_game()
