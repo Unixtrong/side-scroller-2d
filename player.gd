@@ -21,7 +21,7 @@ enum State {
 
 const GROUND_STATES := [
 	State.IDLE, State.RUNNING, State.LANDING,
-	State.ATTACK, State.HURT, State.DYING
+	State.HURT, State.DYING
 ]
 const RUN_SPEED := 200.0
 # 地面加速度，0.2 秒加到满速
@@ -114,7 +114,10 @@ func tick_physics(state: State, delta: float) -> void:
 				move(default_gravity, delta)
 
 		State.ATTACK:
+			if is_on_floor():
 				stand(default_gravity, delta)
+			else:
+				move(default_gravity, delta)
 
 		State.HURT, State.DYING:
 			stand(default_gravity, delta)
@@ -196,10 +199,14 @@ func get_next_state(state: State) -> State:
 				return State.IDLE
 
 		State.JUMP:
+			if Input.is_action_just_pressed("attack"):
+				return State.ATTACK
 			if velocity.y >= 0: # 跳跃时，速度向下，进入坠落状态
 				return State.FALL
 
 		State.FALL:
+			if Input.is_action_just_pressed("attack"):
+				return State.ATTACK
 			if is_on_floor():
 				return State.LANDING if is_still else State.RUNNING
 			if can_wall_slide(direction):
