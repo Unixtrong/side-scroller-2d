@@ -1188,5 +1188,6 @@ sprite_frames = SubResource("SpriteFrames_pbfsw")
 autoplay = "default"
 frame_progress = 0.0861324
 
+[connection signal="hit" from="Graphics/Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="DieDelayTimer" to="." method="_on_die_delay_timer_timeout"]

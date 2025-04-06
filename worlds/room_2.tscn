@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://buuu6f7eanmug"]
+[gd_scene load_steps=6 format=3 uid="uid://buuu6f7eanmug"]
 
 [ext_resource type="Script" uid="uid://b7ddvldpayxoi" path="res://world.gd" id="1_qfw8o"]
 [ext_resource type="PackedScene" uid="uid://dx23jts7va17q" path="res://map_2.tscn" id="2_h83ob"]
 [ext_resource type="AudioStream" uid="uid://0njcjsv131gv" path="res://assets/BGM/06 3 critical LOOP.mp3" id="2_soqcx"]
 [ext_resource type="PackedScene" uid="uid://bvkd8b2dqhcma" path="res://player.tscn" id="5_f7hpu"]
+[ext_resource type="Script" uid="uid://bt7wq8lxmkcu2" path="res://classes/ShakyCamera.gd" id="5_lnfse"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_qfw8o")
@@ -24,3 +25,4 @@ drag_vertical_enabled = true
 drag_left_margin = 0.4
 drag_right_margin = 0.4
 editor_draw_drag_margin = true
+script = ExtResource("5_lnfse")

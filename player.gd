@@ -285,6 +285,7 @@ func transition_state(from: State, to: State) -> void:
 			SoundManager.play_sfx("Hurt")
 			# 掉血
 			stats.health -= pending_damage.amount
+			Game.shake_camera(4)
 			# 计算击退方向
 			var dir := pending_damage.source.global_position.direction_to(global_position)
 			print("Player, knockback dir: %s" % [dir])
@@ -320,6 +321,14 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
 	pending_damage = Damage.new()
 	pending_damage.amount = 1
 	pending_damage.source = hitbox.owner
+
+
+func _on_hitbox_hit(hurtbox: Variant) -> void:
+	Game.shake_camera(2)
+	
+	Engine.time_scale = 0.01
+	await get_tree().create_timer(0.2, true, false, true).timeout
+	Engine.time_scale = 1
 
 
 func _on_die_delay_timer_timeout() -> void:

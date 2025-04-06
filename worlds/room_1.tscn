@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cq84o7wmvd1lk"]
+[gd_scene load_steps=9 format=3 uid="uid://cq84o7wmvd1lk"]
 
 [ext_resource type="PackedScene" uid="uid://bvkd8b2dqhcma" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b7ddvldpayxoi" path="res://world.gd" id="1_tlwt5"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btlw028uuacli" path="res://enemies/pig.tscn" id="4_aqk2v"]
 [ext_resource type="PackedScene" uid="uid://7ysrwo26awn4" path="res://objects/save_point.tscn" id="5_e6hjw"]
 [ext_resource type="Script" uid="uid://8qbpjjrlnw3l" path="res://classes/EntryPoint.gd" id="5_gbfbk"]
+[ext_resource type="Script" uid="uid://bt7wq8lxmkcu2" path="res://classes/ShakyCamera.gd" id="8_uie6r"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_tlwt5")
@@ -29,6 +30,7 @@ position = Vector2(104, 121)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -26)
+process_callback = 0
 limit_smoothed = true
 position_smoothing_enabled = true
 drag_horizontal_enabled = true
@@ -36,6 +38,7 @@ drag_vertical_enabled = true
 drag_left_margin = 0.4
 drag_right_margin = 0.4
 editor_draw_drag_margin = true
+script = ExtResource("8_uie6r")
 
 [node name="Pig" parent="." instance=ExtResource("4_aqk2v")]
 position = Vector2(592, 224)
