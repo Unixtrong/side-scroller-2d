@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://jel1n55mr32h"
-path="res://.godot/imported/24_orc_death_spin.wav-68114acafee835070e8cc08b2a72edc0.sample"
+path="res://.godot/imported/24_orc_death_spin.wav-4818b64ad9b0d8efe1fd3bdec1869705.sample"
 
 [deps]
 
-source_file="res://assets/SFX/24_orc_death_spin.wav"
-dest_files=["res://.godot/imported/24_orc_death_spin.wav-68114acafee835070e8cc08b2a72edc0.sample"]
+source_file="res://assets/sfx/24_orc_death_spin.wav"
+dest_files=["res://.godot/imported/24_orc_death_spin.wav-4818b64ad9b0d8efe1fd3bdec1869705.sample"]
 
 [params]
 

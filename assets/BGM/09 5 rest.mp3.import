@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://cfombl1gsgust"
-path="res://.godot/imported/09 5 rest.mp3-7bb22cd658f86e6fe6b00b48d8ba71f9.mp3str"
+path="res://.godot/imported/09 5 rest.mp3-8b4406f2f29800b6b588448cea973fbe.mp3str"
 
 [deps]
 
-source_file="res://assets/BGM/09 5 rest.mp3"
-dest_files=["res://.godot/imported/09 5 rest.mp3-7bb22cd658f86e6fe6b00b48d8ba71f9.mp3str"]
+source_file="res://assets/bgm/09 5 rest.mp3"
+dest_files=["res://.godot/imported/09 5 rest.mp3-8b4406f2f29800b6b588448cea973fbe.mp3str"]
 
 [params]
 

@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bygjnltexxupb"
-path="res://.godot/imported/07_human_atk_sword_1.wav-58ac818117ae0dda0edf7886b697f950.sample"
+path="res://.godot/imported/07_human_atk_sword_1.wav-3eb3be360e2ef3526e6420740498fced.sample"
 
 [deps]
 
-source_file="res://assets/SFX/07_human_atk_sword_1.wav"
-dest_files=["res://.godot/imported/07_human_atk_sword_1.wav-58ac818117ae0dda0edf7886b697f950.sample"]
+source_file="res://assets/sfx/07_human_atk_sword_1.wav"
+dest_files=["res://.godot/imported/07_human_atk_sword_1.wav-3eb3be360e2ef3526e6420740498fced.sample"]
 
 [params]
 

@@ -37,6 +37,7 @@ func tick_physics(state: State, delta: float) -> void:
 			if player_checker.is_colliding():
 				calm_down_timer.start()
 
+
 func get_next_state(state: State) -> State:
 	if stats.health == 0:
 		return State.DYING
@@ -70,11 +71,11 @@ func get_next_state(state: State) -> State:
 
 # 状态改变时调用d
 func transition_state(from: State, to: State) -> void:
-	#print("[%s] %s -> %s" % [
-		#Engine.get_physics_frames(),
-		#State.keys()[from] if from != -1 else "<START>",
-		#State.keys()[to]
-	#])
+	print("[%s] %s -> %s" % [
+		Engine.get_physics_frames(),
+		State.keys()[from] if from != -1 else "<START>",
+		State.keys()[to]
+	])
 
 	match to:
 		State.IDLE:

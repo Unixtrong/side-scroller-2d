@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://yf0tj45kkxgb"
-path="res://.godot/imported/19 10 world map LOOP.mp3-0a6d8dfd18acb02f6d05fcc69e71ba7b.mp3str"
+path="res://.godot/imported/19 10 world map LOOP.mp3-64296642c95b61647bb6c9d770a1de2e.mp3str"
 
 [deps]
 
-source_file="res://assets/BGM/19 10 world map LOOP.mp3"
-dest_files=["res://.godot/imported/19 10 world map LOOP.mp3-0a6d8dfd18acb02f6d05fcc69e71ba7b.mp3str"]
+source_file="res://assets/bgm/19 10 world map LOOP.mp3"
+dest_files=["res://.godot/imported/19 10 world map LOOP.mp3-64296642c95b61647bb6c9d770a1de2e.mp3str"]
 
 [params]
 

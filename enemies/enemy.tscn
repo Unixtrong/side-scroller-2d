@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://bhvfxmsj7fely" path="res://classes/StateMachine.gd" id="2_7frlh"]
 [ext_resource type="Script" uid="uid://bp5qlq201qivk" path="res://classes/Hitbox.gd" id="2_orwns"]
 [ext_resource type="Script" uid="uid://cxn8xvygr8tum" path="res://classes/Hurtbox.gd" id="3_a6vjd"]
-[ext_resource type="AudioStream" uid="uid://rjjhava3a2qy" path="res://assets/SFX/21_orc_damage_1.wav" id="5_07tka"]
+[ext_resource type="AudioStream" uid="uid://rjjhava3a2qy" path="res://assets/sfx/21_orc_damage_1.wav" id="5_07tka"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4

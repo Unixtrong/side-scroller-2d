@@ -3,12 +3,12 @@
 importer="wav"
 type="AudioStreamWAV"
 uid="uid://bobrrh24vq2rs"
-path="res://.godot/imported/11_human_damage_1.wav-f1116eb29d8f27081473238a2e544acf.sample"
+path="res://.godot/imported/11_human_damage_1.wav-ab2e898511bacba179017cdd7ff79f39.sample"
 
 [deps]
 
-source_file="res://assets/SFX/11_human_damage_1.wav"
-dest_files=["res://.godot/imported/11_human_damage_1.wav-f1116eb29d8f27081473238a2e544acf.sample"]
+source_file="res://assets/sfx/11_human_damage_1.wav"
+dest_files=["res://.godot/imported/11_human_damage_1.wav-ab2e898511bacba179017cdd7ff79f39.sample"]
 
 [params]
 

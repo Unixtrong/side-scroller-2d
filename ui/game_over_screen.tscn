@@ -2,7 +2,7 @@
 
 [ext_resource type="FontFile" uid="uid://dcmsc5loam18l" path="res://assets/fonts/SmileySans-Oblique.ttf" id="1_dcpkc"]
 [ext_resource type="Script" uid="uid://bfnlo3dsd0ey4" path="res://ui/game_over_screen.gd" id="1_pmiq4"]
-[ext_resource type="AudioStream" uid="uid://cfombl1gsgust" path="res://assets/BGM/09 5 rest.mp3" id="2_rmaqg"]
+[ext_resource type="AudioStream" uid="uid://cfombl1gsgust" path="res://assets/bgm/09 5 rest.mp3" id="2_rmaqg"]
 [ext_resource type="Theme" uid="uid://b5552gr7ldimv" path="res://ui/main_theme.tres" id="3_e20le"]
 
 [sub_resource type="Animation" id="Animation_sq8h3"]

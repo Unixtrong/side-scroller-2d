@@ -9,10 +9,10 @@
 [ext_resource type="Script" uid="uid://c6oaj16n3rokm" path="res://classes/Stats.gd" id="7_2y6nl"]
 [ext_resource type="Texture2D" uid="uid://dh1xcbevlbeqg" path="res://art/KingsAndPigs/Sprites/03-Pig/Dead (34x28).png" id="7_5cov1"]
 [ext_resource type="Texture2D" uid="uid://c61krjn44l7fv" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/!!! In (24x8).png" id="8_n51ks"]
-[ext_resource type="AudioStream" uid="uid://dno3dhd5ytoqd" path="res://assets/SFX/23_orc_jump_land.wav" id="10_38qkp"]
+[ext_resource type="AudioStream" uid="uid://dno3dhd5ytoqd" path="res://assets/sfx/23_orc_jump_land.wav" id="10_38qkp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2uym"]
-size = Vector2(20, 15)
+size = Vector2(16, 15)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8e0da"]
 radius = 8.0

@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://0njcjsv131gv"
-path="res://.godot/imported/06 3 critical LOOP.mp3-755ec1b43ceb2286b1b45f030e864ba7.mp3str"
+path="res://.godot/imported/06 3 critical LOOP.mp3-75fab7ac2b52ee4c5b80f948f1184e76.mp3str"
 
 [deps]
 
-source_file="res://assets/BGM/06 3 critical LOOP.mp3"
-dest_files=["res://.godot/imported/06 3 critical LOOP.mp3-755ec1b43ceb2286b1b45f030e864ba7.mp3str"]
+source_file="res://assets/bgm/06 3 critical LOOP.mp3"
+dest_files=["res://.godot/imported/06 3 critical LOOP.mp3-75fab7ac2b52ee4c5b80f948f1184e76.mp3str"]
 
 [params]
 

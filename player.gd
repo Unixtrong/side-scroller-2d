@@ -243,11 +243,11 @@ func get_next_state(state: State) -> State:
 
 # 状态改变时调用
 func transition_state(from: State, to: State) -> void:
-	print("[%s] %s -> %s" % [
-		Engine.get_physics_frames(),
-		State.keys()[from] if from != -1 else "<START>",
-		State.keys()[to]
-	])
+	#print("[%s] %s -> %s" % [
+		#Engine.get_physics_frames(),
+		#State.keys()[from] if from != -1 else "<START>",
+		#State.keys()[to]
+	#])
 	if from not in GROUND_STATES and to in GROUND_STATES:
 		coyote_timer.stop()
 
@@ -290,6 +290,7 @@ func transition_state(from: State, to: State) -> void:
 		State.HURT:
 			animation_player.play("hurt")
 			SoundManager.play_sfx("Hurt")
+			InputManager.vibrate(0.8, 0.8, 0.8)
 			# 掉血
 			stats.health -= pending_damage.amount
 			Game.shake_camera(4)
