@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://cr0iv64utohl7" path="res://assets/sprites/tile_sets/Terrain (32x32).png" id="3_l1ku3"]
 [ext_resource type="AudioStream" uid="uid://yf0tj45kkxgb" path="res://assets/bgm/19 10 world map LOOP.mp3" id="3_wa5rm"]
 [ext_resource type="Texture2D" uid="uid://dsx4dcok6xu34" path="res://assets/sprites/tile_sets/Decorations (32x32).png" id="4_6qcwj"]
-[ext_resource type="Texture2D" uid="uid://bubadihpbg862" path="res://art/KingsAndPigs/Sprites/11-Door/Idle.png" id="5_6qcwj"]
+[ext_resource type="Texture2D" uid="uid://csf3vt5i73lbr" path="res://assets/sprites/map/Door-Idle.png" id="5_6qcwj"]
 [ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://assets/sprites/player/Idle (78x58).png" id="5_wa5rm"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_53bcp"]

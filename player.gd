@@ -15,6 +15,7 @@ enum State {
 	WALL_SLIDING,
 	WALL_JUMP,
 	ATTACK,
+	FALLING_ATTACK,
 	HURT,
 	DYING
 }
@@ -119,6 +120,9 @@ func tick_physics(state: State, delta: float) -> void:
 			else:
 				move(default_gravity, delta)
 
+		State.FALLING_ATTACK:
+			move(default_gravity * 3, delta)
+
 		State.HURT, State.DYING:
 			stand(default_gravity, delta)
 
@@ -200,13 +204,13 @@ func get_next_state(state: State) -> State:
 
 		State.JUMP:
 			if Input.is_action_just_pressed("attack"):
-				return State.ATTACK
+				return State.FALLING_ATTACK
 			if velocity.y >= 0: # 跳跃时，速度向下，进入坠落状态
 				return State.FALL
 
 		State.FALL:
 			if Input.is_action_just_pressed("attack"):
-				return State.ATTACK
+				return State.FALLING_ATTACK
 			if is_on_floor():
 				return State.LANDING if is_still else State.RUNNING
 			if can_wall_slide(direction):
@@ -234,6 +238,10 @@ func get_next_state(state: State) -> State:
 			if not animation_player.is_playing():
 				return State.IDLE
 
+		State.FALLING_ATTACK:
+			if is_on_floor():
+				return State.LANDING if is_still else State.RUNNING
+
 		State.HURT:
 			if not animation_player.is_playing():
 				return State.RUNNING
@@ -243,11 +251,11 @@ func get_next_state(state: State) -> State:
 
 # 状态改变时调用
 func transition_state(from: State, to: State) -> void:
-	#print("[%s] %s -> %s" % [
-		#Engine.get_physics_frames(),
-		#State.keys()[from] if from != -1 else "<START>",
-		#State.keys()[to]
-	#])
+	print("[%s][player] %s -> %s" % [
+		Engine.get_physics_frames(),
+		State.keys()[from] if from != -1 else "<START>",
+		State.keys()[to]
+	])
 	if from not in GROUND_STATES and to in GROUND_STATES:
 		coyote_timer.stop()
 
@@ -287,10 +295,14 @@ func transition_state(from: State, to: State) -> void:
 			animation_player.play("attack")
 			SoundManager.play_sfx("Attack")
 
+		State.FALLING_ATTACK:
+			animation_player.play("falling_attack")
+			SoundManager.play_sfx("Attack")
+
 		State.HURT:
 			animation_player.play("hurt")
 			SoundManager.play_sfx("Hurt")
-			InputManager.vibrate(0.8, 0.8, 0.8)
+			InputManager.vibrate(0.6, 0.8, 0.2)
 			# 掉血
 			stats.health -= pending_damage.amount
 			Game.shake_camera(4)
@@ -335,7 +347,7 @@ func _on_hitbox_hit(hurtbox: Variant) -> void:
 	Game.shake_camera(2)
 	
 	Engine.time_scale = 0.01
-	await get_tree().create_timer(0.2, true, false, true).timeout
+	await get_tree().create_timer(0.1, true, false, true).timeout
 	Engine.time_scale = 1
 
 
@@ -343,3 +355,11 @@ func _on_die_delay_timer_timeout() -> void:
 	#Game.player_stats.health = Game.player_stats.max_health
 	#get_tree().reload_current_scene()
 	game_over_screen.show_game_over()
+
+
+func _on_falling_hit_box_hit(hurtbox: Variant) -> void:
+	Game.shake_camera(2)
+	
+	Engine.time_scale = 0.01
+	await get_tree().create_timer(0.2, true, false, true).timeout
+	Engine.time_scale = 1

@@ -32,10 +32,6 @@ window/size/window_width_override=1152
 window/size/window_height_override=768
 window/stretch/mode="canvas_items"
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/com.timothyqiu.animation-resetter/plugin.cfg")
-
 [input]
 
 ui_accept={

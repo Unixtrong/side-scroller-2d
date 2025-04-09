@@ -1,17 +1,20 @@
-[gd_scene load_steps=24 format=3 uid="uid://btlw028uuacli"]
+[gd_scene load_steps=25 format=3 uid="uid://btlw028uuacli"]
 
 [ext_resource type="PackedScene" uid="uid://yg1tmn5xucab" path="res://enemies/enemy.tscn" id="1_gm6cv"]
-[ext_resource type="Texture2D" uid="uid://dk4as0khlbpqv" path="res://art/KingsAndPigs/Sprites/03-Pig/Idle (34x28).png" id="2_b7d6g"]
+[ext_resource type="Texture2D" uid="uid://c8sau4ev80fbh" path="res://assets/sprites/pig/Idle (34x28).png" id="2_b7d6g"]
 [ext_resource type="Script" uid="uid://dkmq4jq66vxdn" path="res://enemies/pig.gd" id="2_l4kac"]
-[ext_resource type="Texture2D" uid="uid://eenvxcguffsq" path="res://art/KingsAndPigs/Sprites/03-Pig/Run (34x28).png" id="3_8e0da"]
-[ext_resource type="Texture2D" uid="uid://b5xu6rrliohcv" path="res://art/KingsAndPigs/Sprites/03-Pig/Hit (34x28).png" id="4_nyr0x"]
-[ext_resource type="Texture2D" uid="uid://dj2lo4aql2e4" path="res://art/KingsAndPigs/Sprites/03-Pig/Attack (34x28).png" id="6_n2uym"]
+[ext_resource type="Texture2D" uid="uid://tx1aswpehdk1" path="res://assets/sprites/pig/Dead (34x28).png" id="4_38qkp"]
+[ext_resource type="Texture2D" uid="uid://bmn2o0p33mtwy" path="res://assets/sprites/pig/Attack (34x28).png" id="4_vx746"]
+[ext_resource type="Texture2D" uid="uid://xx8uh6vhbld7" path="res://assets/sprites/pig/Hit (34x28).png" id="5_vx746"]
 [ext_resource type="Script" uid="uid://c6oaj16n3rokm" path="res://classes/Stats.gd" id="7_2y6nl"]
-[ext_resource type="Texture2D" uid="uid://dh1xcbevlbeqg" path="res://art/KingsAndPigs/Sprites/03-Pig/Dead (34x28).png" id="7_5cov1"]
-[ext_resource type="Texture2D" uid="uid://c61krjn44l7fv" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/!!! In (24x8).png" id="8_n51ks"]
+[ext_resource type="Texture2D" uid="uid://cfmwi00ipgcgw" path="res://assets/sprites/pig/Run (34x28).png" id="7_j1e37"]
+[ext_resource type="Texture2D" uid="uid://dncyebigpyrok" path="res://assets/sprites/dialogue/!!! In (24x8).png" id="8_38qkp"]
 [ext_resource type="AudioStream" uid="uid://dno3dhd5ytoqd" path="res://assets/sfx/23_orc_jump_land.wav" id="10_38qkp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n2uym"]
+size = Vector2(16, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_38qkp"]
 size = Vector2(16, 15)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8e0da"]
@@ -119,7 +122,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("6_n2uym")]
+"values": [ExtResource("4_vx746")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -181,18 +184,6 @@ tracks/5/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Graphics/Hurtbox:monitorable")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_n51ks"]
 resource_name = "die"
@@ -208,7 +199,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("7_5cov1")]
+"values": [ExtResource("4_38qkp")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -258,17 +249,19 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(-3, -14)]
 }
-tracks/5/type = "value"
+tracks/5/type = "method"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Graphics/Hitbox:monitoring")
+tracks/5/path = NodePath(".")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(0.4),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"values": [{
+"args": [],
+"method": &"count_down_free"
+}]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -281,20 +274,6 @@ tracks/6/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath(".")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"count_down_free"
-}]
 }
 
 [sub_resource type="Animation" id="Animation_l4kac"]
@@ -311,7 +290,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("4_nyr0x")]
+"values": [ExtResource("5_vx746")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -360,30 +339,6 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 0, 1]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Graphics/Hitbox:monitoring")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Graphics/Hurtbox:monitorable")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_8e0da"]
@@ -451,30 +406,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Graphics/Hitbox:monitoring")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Graphics/Hurtbox:monitorable")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="Animation" id="Animation_n2uym"]
 resource_name = "walking"
@@ -491,7 +422,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_8e0da")]
+"values": [ExtResource("7_j1e37")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -541,30 +472,6 @@ tracks/4/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Graphics/Hitbox:monitoring")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Graphics/Hurtbox:monitorable")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_nyr0x"]
 _data = {
@@ -576,29 +483,29 @@ _data = {
 &"running": SubResource("Animation_n2uym")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_38qkp"]
-atlas = ExtResource("8_n51ks")
+[sub_resource type="AtlasTexture" id="AtlasTexture_vx746"]
+atlas = ExtResource("8_38qkp")
 region = Rect2(0, 0, 34, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_vx746"]
-atlas = ExtResource("8_n51ks")
+[sub_resource type="AtlasTexture" id="AtlasTexture_4iyj0"]
+atlas = ExtResource("8_38qkp")
 region = Rect2(34, 0, 34, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4iyj0"]
-atlas = ExtResource("8_n51ks")
+[sub_resource type="AtlasTexture" id="AtlasTexture_j1e37"]
+atlas = ExtResource("8_38qkp")
 region = Rect2(68, 0, 34, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_j1e37"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_38qkp")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_vx746")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4iyj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j1e37")
 }],
 "loop": false,
 "name": &"default",
@@ -638,7 +545,7 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Hurtbox" index="0"]
 position = Vector2(0, -7.5)
-shape = SubResource("RectangleShape2D_n2uym")
+shape = SubResource("RectangleShape2D_38qkp")
 
 [node name="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -8)

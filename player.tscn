@@ -1,9 +1,10 @@
-[gd_scene load_steps=57 format=3 uid="uid://bvkd8b2dqhcma"]
+[gd_scene load_steps=60 format=3 uid="uid://bvkd8b2dqhcma"]
 
 [ext_resource type="Script" uid="uid://c8bvkmps32w7r" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bvg457udowh4a" path="res://assets/sprites/player/Idle (78x58).png" id="2_onrkg"]
 [ext_resource type="Texture2D" uid="uid://bxj80r6kebn0t" path="res://assets/sprites/player/Run (78x58).png" id="3_hqtel"]
 [ext_resource type="Script" uid="uid://cxn8xvygr8tum" path="res://classes/Hurtbox.gd" id="3_n7ghd"]
+[ext_resource type="Texture2D" uid="uid://d24136qdpdvos" path="res://assets/Snipaste_2025-04-09_01-48-30.jpg" id="4_7lmhl"]
 [ext_resource type="Script" uid="uid://bp5qlq201qivk" path="res://classes/Hitbox.gd" id="4_nvl01"]
 [ext_resource type="Texture2D" uid="uid://boai5bje0enai" path="res://assets/sprites/player/Jump (78x58).png" id="4_sweqy"]
 [ext_resource type="Texture2D" uid="uid://cijyxcnlpspxa" path="res://assets/sprites/player/Fall (78x58).png" id="5_2hs0m"]
@@ -16,12 +17,15 @@
 [ext_resource type="PackedScene" uid="uid://dathxnywliihx" path="res://ui/status_panel.tscn" id="15_606se"]
 [ext_resource type="PackedScene" uid="uid://f7onxbug5847" path="res://ui/game_over_screen.tscn" id="16_op7ga"]
 [ext_resource type="PackedScene" uid="uid://bxv66p8irb53f" path="res://ui/pause_screen.tscn" id="16_q13i1"]
-[ext_resource type="Texture2D" uid="uid://byd0urt5rldir" path="res://art/KingsAndPigs/Sprites/13-Dialogue Boxes/Interrogation In (24x8).png" id="16_u1c27"]
+[ext_resource type="Texture2D" uid="uid://b3y77ujct33pr" path="res://assets/sprites/dialogue/Interrogation In (24x8).png" id="16_u1c27"]
 [ext_resource type="Texture2D" uid="uid://d3gycwamff0h6" path="res://assets/control/gdb-playstation-2.png" id="18_pylmc"]
 [ext_resource type="Texture2D" uid="uid://bs7oyyjso24rq" path="res://assets/control/gdb-keyboard-2.png" id="18_q13i1"]
 [ext_resource type="Texture2D" uid="uid://dvjdtymfdgn0m" path="res://assets/control/gdb-switch-2.png" id="20_7ahtn"]
 [ext_resource type="Script" uid="uid://hodo4d648cx8" path="res://classes/InteractionIcon.gd" id="20_pbfsw"]
 [ext_resource type="Texture2D" uid="uid://c8sj85lhp0st0" path="res://assets/control/gdb-xbox-2.png" id="21_7lmhl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ahtn"]
+size = Vector2(52, 20)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nvl01"]
 radius = 15.0
@@ -131,6 +135,30 @@ tracks/7/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Graphics/FallingHitBox/FallingHitShape:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Graphics/FallingHitBox/FallingEffect:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_n7ghd"]
@@ -444,6 +472,131 @@ tracks/7/path = NodePath("Graphics/Hitbox/AttackShape:disabled")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_7ahtn"]
+resource_name = "falling_land"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-3, -29)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Sprite2D:region_rect")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 78, 58)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Graphics/Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Graphics/Sprite2D:texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_1jxqw")]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Graphics/Sprite2D:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Graphics/Sprite2D:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Graphics/Sprite2D:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Graphics/Hitbox/AttackShape:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Graphics/FallingHitBox/FallingHitShape:disabled")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Graphics/FallingHitBox/FallingEffect:visible")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -1064,6 +1217,7 @@ _data = {
 &"attack": SubResource("Animation_n7ghd"),
 &"die": SubResource("Animation_u1c27"),
 &"fall": SubResource("Animation_sweqy"),
+&"falling_attack": SubResource("Animation_7ahtn"),
 &"hurt": SubResource("Animation_606se"),
 &"idle": SubResource("Animation_4flbx"),
 &"jump": SubResource("Animation_1jxqw"),
@@ -1256,6 +1410,23 @@ target_position = Vector2(11, 0)
 position = Vector2(0, -16)
 target_position = Vector2(11, 0)
 
+[node name="FallingHitBox" type="Area2D" parent="Graphics"]
+collision_layer = 0
+collision_mask = 16
+script = ExtResource("4_nvl01")
+metadata/_custom_type_script = "uid://bp5qlq201qivk"
+
+[node name="FallingHitShape" type="CollisionShape2D" parent="Graphics/FallingHitBox"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_7ahtn")
+disabled = true
+
+[node name="FallingEffect" type="Sprite2D" parent="Graphics/FallingHitBox"]
+visible = false
+position = Vector2(0, -10)
+scale = Vector2(0.216216, 0.216216)
+texture = ExtResource("4_7lmhl")
+
 [node name="Hitbox" type="Area2D" parent="Graphics"]
 collision_layer = 0
 collision_mask = 16
@@ -1322,10 +1493,10 @@ offset_bottom = 46.0
 [node name="InteractionIcon" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -54)
 sprite_frames = SubResource("SpriteFrames_pbfsw")
-animation = &"nintendo"
-autoplay = "dual_shock"
+animation = &"keyboard"
 script = ExtResource("20_pbfsw")
 
+[connection signal="hit" from="Graphics/FallingHitBox" to="." method="_on_falling_hit_box_hit"]
 [connection signal="hit" from="Graphics/Hitbox" to="." method="_on_hitbox_hit"]
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]
 [connection signal="timeout" from="DieDelayTimer" to="." method="_on_die_delay_timer_timeout"]

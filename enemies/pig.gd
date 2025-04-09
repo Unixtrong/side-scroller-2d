@@ -71,7 +71,7 @@ func get_next_state(state: State) -> State:
 
 # 状态改变时调用d
 func transition_state(from: State, to: State) -> void:
-	print("[%s] %s -> %s" % [
+	print("[%s][pig] %s -> %s" % [
 		Engine.get_physics_frames(),
 		State.keys()[from] if from != -1 else "<START>",
 		State.keys()[to]
@@ -87,7 +87,7 @@ func transition_state(from: State, to: State) -> void:
 
 		State.ATTENTION:
 			animation_player.speed_scale = 1.0
-			animation_player.play("idle")
+			#animation_player.play("idle")
 			attention_anim.show()
 			attention_anim.play("default")
 			await attention_anim.animation_finished
