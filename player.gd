@@ -35,6 +35,8 @@ const JUMP_VELOCITY := -360.0
 const WALL_JUMP_VELOCITY := Vector2(500.0, -240.0)
 # 击退速度
 const KNOCKBACK_AMOUNT := 384.0
+# 最小坠落攻击高度
+const MIN_FALLING_ATTACK_HEIGHT := 20.0
 
 @export var direction := Direction.RIGHT:
 	set(v):
@@ -49,6 +51,8 @@ var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as floa
 var is_first_tick := true
 # 待处理伤害
 var pending_damage: Damage
+# 玩家起跳位置
+var jump_start_position: Vector2
 # 交互对象组
 var interacting_with: Array[Interactable]
 
@@ -203,13 +207,13 @@ func get_next_state(state: State) -> State:
 				return State.IDLE
 
 		State.JUMP:
-			if Input.is_action_just_pressed("attack"):
+			if Input.is_action_just_pressed("attack") and _can_falling_attack():
 				return State.FALLING_ATTACK
 			if velocity.y >= 0: # 跳跃时，速度向下，进入坠落状态
 				return State.FALL
 
 		State.FALL:
-			if Input.is_action_just_pressed("attack"):
+			if Input.is_action_just_pressed("attack") and _can_falling_attack():
 				return State.FALLING_ATTACK
 			if is_on_floor():
 				return State.LANDING if is_still else State.RUNNING
@@ -258,6 +262,8 @@ func transition_state(from: State, to: State) -> void:
 	])
 	if from not in GROUND_STATES and to in GROUND_STATES:
 		coyote_timer.stop()
+	if to != State.JUMP:
+		jump_start_position = Vector2.ZERO
 
 	match to:
 		State.IDLE:
@@ -269,6 +275,7 @@ func transition_state(from: State, to: State) -> void:
 		State.JUMP:
 			animation_player.play("jump")
 			velocity.y = JUMP_VELOCITY
+			jump_start_position = global_position
 			coyote_timer.stop()
 			jump_request_timer.stop()
 			SoundManager.play_sfx("Jump")
@@ -325,6 +332,17 @@ func transition_state(from: State, to: State) -> void:
 	is_first_tick = true
 
 
+func get_distance_to_ground() -> float:
+	var space_state = get_world_2d().direct_space_state
+	var from = global_position
+	var to = global_position + Vector2(0, 1000)  # 向下打超长一根线
+	var params = PhysicsRayQueryParameters2D.create(from, to)
+	var result = space_state.intersect_ray(params)
+	if result:
+		return result.position.y - global_position.y
+	return 1000  # 没碰到地面
+
+
 func die() -> void:
 	#game_over_screen.show_game_over()
 	pass
@@ -332,6 +350,10 @@ func die() -> void:
 
 func die_delay() -> void:
 	die_delay_timer.start()
+
+
+func _can_falling_attack() -> bool:
+	return get_distance_to_ground() > MIN_FALLING_ATTACK_HEIGHT
 
 
 func _on_hurtbox_hurt(hitbox: Hitbox) -> void:

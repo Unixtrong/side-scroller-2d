@@ -11,7 +11,7 @@ enum State {
 
 signal pig_free
 
-const KNOCKBACK_AMOUNT := 384.0
+const KNOCKBACK_AMOUNT := 250.0
 
 var pending_damage: Damage
 
