@@ -1,13 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://btlw028uuacli"]
+[gd_scene load_steps=24 format=3 uid="uid://btlw028uuacli"]
 
 [ext_resource type="PackedScene" uid="uid://yg1tmn5xucab" path="res://enemies/enemy.tscn" id="1_gm6cv"]
 [ext_resource type="Texture2D" uid="uid://c8sau4ev80fbh" path="res://assets/sprites/pig/Idle (34x28).png" id="2_b7d6g"]
 [ext_resource type="Script" uid="uid://dkmq4jq66vxdn" path="res://enemies/pig.gd" id="2_l4kac"]
-[ext_resource type="Script" uid="uid://b8u6r8i0qtamj" path="res://classes/HitCheckBox.gd" id="4_4iyj0"]
 [ext_resource type="Texture2D" uid="uid://tx1aswpehdk1" path="res://assets/sprites/pig/Dead (34x28).png" id="4_38qkp"]
 [ext_resource type="Texture2D" uid="uid://bmn2o0p33mtwy" path="res://assets/sprites/pig/Attack (34x28).png" id="4_vx746"]
 [ext_resource type="Texture2D" uid="uid://xx8uh6vhbld7" path="res://assets/sprites/pig/Hit (34x28).png" id="5_vx746"]
-[ext_resource type="Script" uid="uid://c6oaj16n3rokm" path="res://classes/Stats.gd" id="7_2y6nl"]
 [ext_resource type="Texture2D" uid="uid://cfmwi00ipgcgw" path="res://assets/sprites/pig/Run (34x28).png" id="7_j1e37"]
 [ext_resource type="Texture2D" uid="uid://dncyebigpyrok" path="res://assets/sprites/dialogue/!!! In (24x8).png" id="8_38qkp"]
 [ext_resource type="AudioStream" uid="uid://dno3dhd5ytoqd" path="res://assets/sfx/23_orc_jump_land.wav" id="10_38qkp"]
@@ -555,11 +553,6 @@ target_position = Vector2(0, 5)
 position = Vector2(7, -1)
 target_position = Vector2(0, 5)
 
-[node name="HitCheckBox" type="Area2D" parent="Graphics" index="5"]
-collision_layer = 0
-collision_mask = 8
-script = ExtResource("4_4iyj0")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HitCheckBox" index="0"]
 position = Vector2(-12, -14)
 shape = SubResource("CapsuleShape2D_38qkp")
@@ -603,12 +596,7 @@ one_shot = true
 wait_time = 3.0
 one_shot = true
 
-[node name="Stats" type="Node" parent="." index="6"]
-script = ExtResource("7_2y6nl")
-max_health = 5
-metadata/_custom_type_script = "uid://c6oaj16n3rokm"
-
-[node name="AudioDie" type="AudioStreamPlayer" parent="." index="9"]
+[node name="AudioDie" type="AudioStreamPlayer" parent="." index="8"]
 stream = ExtResource("10_38qkp")
 
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]

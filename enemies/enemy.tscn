@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://yg1tmn5xucab"]
+[gd_scene load_steps=8 format=3 uid="uid://yg1tmn5xucab"]
 
 [ext_resource type="Script" uid="uid://b4l703brdfdsn" path="res://enemies/enemy.gd" id="1_fw1ev"]
+[ext_resource type="Script" uid="uid://b8u6r8i0qtamj" path="res://classes/HitCheckBox.gd" id="2_3t1x0"]
 [ext_resource type="Script" uid="uid://bhvfxmsj7fely" path="res://classes/StateMachine.gd" id="2_7frlh"]
 [ext_resource type="Script" uid="uid://bp5qlq201qivk" path="res://classes/Hitbox.gd" id="2_orwns"]
 [ext_resource type="Script" uid="uid://cxn8xvygr8tum" path="res://classes/Hurtbox.gd" id="3_a6vjd"]
 [ext_resource type="AudioStream" uid="uid://rjjhava3a2qy" path="res://assets/sfx/21_orc_damage_1.wav" id="5_07tka"]
+[ext_resource type="Script" uid="uid://c6oaj16n3rokm" path="res://classes/Stats.gd" id="7_epsnb"]
 
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
@@ -15,6 +17,11 @@ max_speed = null
 [node name="Graphics" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+
+[node name="HitCheckBox" type="Area2D" parent="Graphics"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_3t1x0")
 
 [node name="Hitbox" type="Area2D" parent="Graphics"]
 collision_layer = 0
@@ -41,5 +48,10 @@ metadata/_custom_type_script = "uid://bhvfxmsj7fely"
 
 [node name="AudioHit" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_07tka")
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("7_epsnb")
+max_health = 5
+metadata/_custom_type_script = "uid://c6oaj16n3rokm"
 
 [connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

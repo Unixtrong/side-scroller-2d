@@ -1,0 +1,159 @@
+[gd_scene load_steps=10 format=3 uid="uid://qo2u031jf7uh"]
+
+[ext_resource type="PackedScene" uid="uid://yg1tmn5xucab" path="res://enemies/enemy.tscn" id="1_fpirg"]
+[ext_resource type="Texture2D" uid="uid://x4xdewkmymom" path="res://assets/sprites/cannon/Idle.png" id="2_lu22h"]
+[ext_resource type="Script" uid="uid://cpb63rheeevtv" path="res://enemies/cannon.gd" id="2_rwgvn"]
+[ext_resource type="Texture2D" uid="uid://dcxv17hynamdq" path="res://assets/sprites/cannon/Shoot (44x28).png" id="4_nhvac"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nhvac"]
+size = Vector2(24, 18)
+
+[sub_resource type="Animation" id="Animation_nhvac"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_lu22h")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Graphics/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_rwgvn"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_lu22h")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Graphics/Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_b6yh4"]
+resource_name = "shoot"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Graphics/Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Graphics/Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Graphics/Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_nhvac")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b6yh4"]
+_data = {
+&"RESET": SubResource("Animation_nhvac"),
+&"idle": SubResource("Animation_rwgvn"),
+&"shoot": SubResource("Animation_b6yh4")
+}
+
+[node name="Cannon" instance=ExtResource("1_fpirg")]
+script = ExtResource("2_rwgvn")
+direction = -1
+max_speed = 50.0
+
+[node name="Sprite2D" parent="Graphics" index="0"]
+texture = ExtResource("2_lu22h")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(7, 2)
+shape = SubResource("RectangleShape2D_nhvac")
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+&"": SubResource("AnimationLibrary_b6yh4")
+}
+
+[node name="ShootCdTimer" type="Timer" parent="." index="7"]
+wait_time = 3.0
+one_shot = true
+
+[node name="ShootPosition" type="Marker2D" parent="." index="8"]
+position = Vector2(-8, 0)

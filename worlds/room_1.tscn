@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://cq84o7wmvd1lk"]
+[gd_scene load_steps=8 format=3 uid="uid://cq84o7wmvd1lk"]
 
 [ext_resource type="PackedScene" uid="uid://bvkd8b2dqhcma" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="Script" uid="uid://b7ddvldpayxoi" path="res://world.gd" id="1_tlwt5"]
 [ext_resource type="PackedScene" uid="uid://sm3psxmopkc0" path="res://map_1.tscn" id="2_fj7yv"]
 [ext_resource type="AudioStream" uid="uid://dfht81me0ls8o" path="res://assets/bgm/40 21 marching LOOP.mp3" id="3_ua44f"]
 [ext_resource type="PackedScene" uid="uid://btlw028uuacli" path="res://enemies/pig.tscn" id="4_aqk2v"]
+[ext_resource type="PackedScene" uid="uid://qo2u031jf7uh" path="res://enemies/cannon.tscn" id="7_ua44f"]
 [ext_resource type="Script" uid="uid://bt7wq8lxmkcu2" path="res://classes/ShakyCamera.gd" id="8_uie6r"]
 
 [node name="World" type="Node2D"]
@@ -35,3 +36,6 @@ position = Vector2(592, 224)
 
 [node name="Pig2" parent="." instance=ExtResource("4_aqk2v")]
 position = Vector2(824, 224)
+
+[node name="Cannon" parent="." instance=ExtResource("7_ua44f")]
+position = Vector2(1175, 53)
