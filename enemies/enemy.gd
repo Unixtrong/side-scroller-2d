@@ -14,7 +14,7 @@ enum Direction {
 			await ready
 		graphics.scale.x = -direction
 
-@export var max_speed := 120.0
+@export var max_speed := 50.0
 @export var acceleration := max_speed / 0.2
 
 var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as float
