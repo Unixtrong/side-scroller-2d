@@ -26,6 +26,11 @@ var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as floa
 @onready var stats: Stats = $Stats
 @onready var audio_hit: AudioStreamPlayer = $AudioHit
 
+func _process(delta: float) -> void:
+    if global_position.y > World.WORLD_BOTTOM:
+        print("[Enemy] screen exited, name: %s" % [name])
+        queue_free()  # 如果 pig 已经掉出屏幕，清除它
+
 
 func move(speed: float, delta: float) -> void:
     velocity.x = move_toward(velocity.x, speed * direction, acceleration * delta)

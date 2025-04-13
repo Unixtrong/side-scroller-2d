@@ -528,6 +528,8 @@ _data = {
 
 [node name="Pig" instance=ExtResource("1_gm6cv")]
 script = ExtResource("2_l4kac")
+direction = -1
+max_speed = 50.0
 
 [node name="Sprite2D" parent="Graphics" index="0"]
 position = Vector2(-3, -14)
@@ -543,13 +545,17 @@ target_position = Vector2(-12, 0)
 [node name="PlayerChecker" type="RayCast2D" parent="Graphics" index="2"]
 position = Vector2(0, -14)
 target_position = Vector2(-103, 0)
-collision_mask = 2
+collision_mask = 3
 
-[node name="FloorChecker" type="RayCast2D" parent="Graphics" index="3"]
+[node name="FrontFloorChecker" type="RayCast2D" parent="Graphics" index="3"]
 position = Vector2(-7, -1)
 target_position = Vector2(0, 5)
 
-[node name="HitCheckBox" type="Area2D" parent="Graphics" index="4"]
+[node name="BackFloorChecker" type="RayCast2D" parent="Graphics" index="4"]
+position = Vector2(7, -1)
+target_position = Vector2(0, 5)
+
+[node name="HitCheckBox" type="Area2D" parent="Graphics" index="5"]
 collision_layer = 0
 collision_mask = 8
 script = ExtResource("4_4iyj0")
@@ -558,14 +564,14 @@ script = ExtResource("4_4iyj0")
 position = Vector2(-12, -14)
 shape = SubResource("CapsuleShape2D_38qkp")
 
-[node name="Hitbox" parent="Graphics" index="5"]
+[node name="Hitbox" parent="Graphics" index="6"]
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Hitbox" index="0"]
 position = Vector2(-12, -14)
 shape = SubResource("CapsuleShape2D_38qkp")
 
-[node name="Hurtbox" parent="Graphics" index="6"]
+[node name="Hurtbox" parent="Graphics" index="7"]
 collision_layer = 16
 collision_mask = 0
 

@@ -55,6 +55,8 @@ var pending_damage: Damage
 var jump_start_position: Vector2
 # 交互对象组
 var interacting_with: Array[Interactable]
+# 是否超出关卡世界
+var is_over_world := false
 
 @onready var graphics: Node2D = $Graphics
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -131,6 +133,11 @@ func tick_physics(state: State, delta: float) -> void:
             stand(default_gravity, delta)
 
     is_first_tick = false
+
+    if !is_over_world and global_position.y > World.WORLD_BOTTOM:
+        print("[Player] over the world, name: %s" % [name])
+        is_over_world = true
+        die()
 
 
 func move(gravity: float, delta: float) -> void:
@@ -344,7 +351,7 @@ func get_distance_to_ground() -> float:
 
 
 func die() -> void:
-    #game_over_screen.show_game_over()
+    game_over_screen.show_game_over()
     pass
 
 

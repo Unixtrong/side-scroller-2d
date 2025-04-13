@@ -2,6 +2,9 @@ class_name World
 extends Node2D
 
 
+const WORLD_BOTTOM = 1000  # 关卡底部的 y 坐标为 1000
+
+
 @export var pig_scene: PackedScene  # 预制体
 @export var spawn_position: Vector2  # 生成位置
 @export var bgm: AudioStream
