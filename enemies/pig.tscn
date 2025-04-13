@@ -594,7 +594,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="AttackCdTimer" type="Timer" parent="." index="5"]
-wait_time = 2.0
+wait_time = 3.0
 one_shot = true
 
 [node name="Stats" type="Node" parent="." index="6"]

@@ -9,22 +9,22 @@ extends Control
 
 
 func _ready() -> void:
-	load_game.disabled = not Game.has_save()
-	new_game.grab_focus()
-	
-	for button: Button in v.get_children():
-		button.mouse_entered.connect(button.grab_focus)
-	
-	SoundManager.setup_ui_sounds(self)
-	SoundManager.play_bgm(bgm)
+    load_game.disabled = not Game.has_save()
+    new_game.grab_focus()
+    
+    for button: Button in v.get_children():
+        button.mouse_entered.connect(button.grab_focus)
+    
+    SoundManager.setup_ui_sounds(self)
+    SoundManager.play_bgm(bgm)
 
 func _on_new_game_pressed() -> void:
-	Game.new_game()
+    Game.new_game()
 
 
 func _on_load_game_pressed() -> void:
-	Game.load_game()
+    Game.load_game()
 
 
 func _on_exit_game_pressed() -> void:
-	get_tree().quit()
+    get_tree().quit()

@@ -1303,7 +1303,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_onrkg")
 metadata/_edit_horizontal_guides_ = [-14.0]

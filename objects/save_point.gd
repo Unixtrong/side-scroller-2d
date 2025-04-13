@@ -5,8 +5,8 @@ extends Interactable
 
 
 func interact() -> void:
-	super()
-	
-	animation_player.play("activated")
-	hi_bubble.hide()
-	Game.save_game()
+    super()
+    
+    animation_player.play("activated")
+    hi_bubble.hide()
+    Game.save_game()

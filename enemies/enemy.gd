@@ -3,16 +3,16 @@ extends CharacterBody2D
 
 
 enum Direction {
-	LEFT = -1,
-	RIGHT = 1,
+    LEFT = -1,
+    RIGHT = 1,
 }
 
 @export var direction := Direction.LEFT:
-	set(v):
-		direction = v
-		if not is_node_ready():
-			await ready
-		graphics.scale.x = -direction
+    set(v):
+        direction = v
+        if not is_node_ready():
+            await ready
+        graphics.scale.x = -direction
 
 @export var max_speed := 50.0
 @export var acceleration := max_speed / 0.2
@@ -28,15 +28,15 @@ var default_gravity := ProjectSettings.get("physics/2d/default_gravity") as floa
 
 
 func move(speed: float, delta: float) -> void:
-	velocity.x = move_toward(velocity.x, speed * direction, acceleration * delta)
-	velocity.y += default_gravity * delta
+    velocity.x = move_toward(velocity.x, speed * direction, acceleration * delta)
+    velocity.y += default_gravity * delta
 
-	move_and_slide()
+    move_and_slide()
 
 
 func count_down_free() -> void:
-	free_timer.start()
+    free_timer.start()
 
 
 func _on_free_timer_timeout() -> void:
-	queue_free()
+    queue_free()
