@@ -17,7 +17,7 @@ bgm = ExtResource("3_ua44f")
 [node name="TileMap2D" parent="." instance=ExtResource("2_fj7yv")]
 
 [node name="Player" parent="." instance=ExtResource("1_f3sb7")]
-position = Vector2(104, 121)
+position = Vector2(1096, 121)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -26)
@@ -39,3 +39,4 @@ position = Vector2(824, 224)
 
 [node name="Cannon" parent="." instance=ExtResource("7_ua44f")]
 position = Vector2(1175, 53)
+attention_distance = 250

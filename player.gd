@@ -324,7 +324,7 @@ func transition_state(from: State, to: State) -> void:
             var dir := pending_damage.source.global_position.direction_to(global_position)
             print("Player, knockback dir: %s" % [dir])
             # 速度 = 击退方向 x 击退速度常亮
-            velocity = dir * KNOCKBACK_AMOUNT
+            velocity = dir * pending_damage.knockback_amount
             #velocity.y = 0.0
             invincible_timer.start()
 
@@ -367,9 +367,12 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
     if invincible_timer.time_left > 0:
         return
 
-    pending_damage = Damage.new()
-    pending_damage.amount = 1
-    pending_damage.source = hitbox.owner
+    var enemy := hitbox.owner as Enemy
+    if enemy:
+        pending_damage = Damage.new()
+        pending_damage.amount = enemy.stats.attack
+        pending_damage.source = enemy
+        pending_damage.knockback_amount = enemy.stats.knockback_amount
 
 
 func _on_hitbox_hit(hurtbox: Variant) -> void:

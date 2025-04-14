@@ -7,6 +7,9 @@ enum State {
 }
 
 
+@export var attention_distance := 250
+
+
 var player: Player
 
 
@@ -52,7 +55,7 @@ func transition_state(from: State, to: State) -> void:
 
 func _should_shoot() -> bool:
     return (
-        global_position.x - player.global_position.x < 200 and 
+        global_position.x - player.global_position.x < attention_distance and 
         global_position.x - player.global_position.x > 0
     ) and shoot_cd_timer.is_stopped()
 

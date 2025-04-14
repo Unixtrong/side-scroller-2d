@@ -6,6 +6,8 @@ signal health_changed
 
 # 最大生命值
 @export var max_health: int = 3
+@export var attack: int = 1
+@export var knockback_amount: int = 384
 
 @onready var health: int = max_health:
     set(v):

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://xx8uh6vhbld7" path="res://assets/sprites/pig/Hit (34x28).png" id="5_vx746"]
 [ext_resource type="Texture2D" uid="uid://cfmwi00ipgcgw" path="res://assets/sprites/pig/Run (34x28).png" id="7_j1e37"]
 [ext_resource type="Texture2D" uid="uid://dncyebigpyrok" path="res://assets/sprites/dialogue/!!! In (24x8).png" id="8_38qkp"]
-[ext_resource type="AudioStream" uid="uid://dno3dhd5ytoqd" path="res://assets/sfx/23_orc_jump_land.wav" id="10_38qkp"]
+[ext_resource type="AudioStream" uid="uid://jel1n55mr32h" path="res://assets/sfx/24_orc_death_spin.wav" id="9_n51ks"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_38qkp"]
 radius = 7.0
@@ -597,6 +597,6 @@ wait_time = 3.0
 one_shot = true
 
 [node name="AudioDie" type="AudioStreamPlayer" parent="." index="8"]
-stream = ExtResource("10_38qkp")
+stream = ExtResource("9_n51ks")
 
 [connection signal="hurt" from="Graphics/Hurtbox" to="." method="_on_hurtbox_hurt"]
