@@ -1,6 +1,10 @@
 class_name Player
 extends CharacterBody2D
 
+
+signal catch_hammer
+
+
 enum Direction {
     LEFT = -1,
     RIGHT = 1,
@@ -15,6 +19,8 @@ enum State {
     WALL_SLIDING,
     WALL_JUMP,
     ATTACK,
+    THROW,
+    CATCH,
     FALLING_ATTACK,
     HURT,
     DYING
@@ -59,6 +65,8 @@ var interacting_with: Array[Interactable]
 var is_over_world := false
 # 是否持有武器
 var has_weapon := true
+# 是否接住了武器
+var has_catched_weapon := true
 
 @onready var graphics: Node2D = $Graphics
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -68,11 +76,13 @@ var has_weapon := true
 @onready var die_delay_timer: Timer = $DieDelayTimer
 @onready var hammer_checker: RayCast2D = $Graphics/HammerChecker
 @onready var foot_checker: RayCast2D = $Graphics/FootChecker
+@onready var hand_mark: Marker2D = $Graphics/HandMark
 @onready var state_machine: StateMachine = $StateMachine
 @onready var stats: Stats = Game.player_stats
 @onready var interaction_icon: AnimatedSprite2D = $InteractionIcon
 @onready var game_over_screen: Control = $CanvasLayer/GameOverScreen
 @onready var pause_screen: Control = $CanvasLayer/PauseScreen
+@onready var hammer := preload("res://player/hammer.tscn")
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -122,7 +132,7 @@ func tick_physics(state: State, delta: float) -> void:
             else:
                 move(default_gravity, delta)
 
-        State.ATTACK:
+        State.ATTACK, State.THROW, State.CATCH:
             if is_on_floor():
                 stand(default_gravity, delta)
             else:
@@ -198,30 +208,41 @@ func get_next_state(state: State) -> State:
     if state in GROUND_STATES and not is_on_floor():
         return State.FALL
 
+    if not has_catched_weapon and has_weapon:
+        return State.CATCH
+
     var direction = Input.get_axis("move_left", "move_right")
     # 是否站立不动
     var is_still := is_zero_approx(direction) and is_zero_approx(velocity.x)
 
     match state:
         State.IDLE:
-            if Input.is_action_just_pressed("attack"):
+            if Input.is_action_just_pressed("throw") and has_weapon:
+                return State.THROW
+            if Input.is_action_just_pressed("attack") and has_weapon:
                 return State.ATTACK
             if not is_still: # 空闲时，没有站立，进入跑步状态
                 return State.RUNNING
 
         State.RUNNING:
-            if Input.is_action_just_pressed("attack"):
+            if Input.is_action_just_pressed("throw") and has_weapon:
+                return State.THROW
+            if Input.is_action_just_pressed("attack") and has_weapon:
                 return State.ATTACK
             if is_still: # 跑步时，站立，进入空闲状态
                 return State.IDLE
 
         State.JUMP:
+            if Input.is_action_just_pressed("throw") and has_weapon:
+                return State.THROW
             if Input.is_action_just_pressed("attack") and _can_falling_attack():
                 return State.FALLING_ATTACK
             if velocity.y >= 0: # 跳跃时，速度向下，进入坠落状态
                 return State.FALL
 
         State.FALL:
+            if Input.is_action_just_pressed("throw") and has_weapon:
+                return State.THROW
             if Input.is_action_just_pressed("attack") and _can_falling_attack():
                 return State.FALLING_ATTACK
             if is_on_floor():
@@ -248,6 +269,14 @@ func get_next_state(state: State) -> State:
                 return State.FALL
 
         State.ATTACK:
+            if not animation_player.is_playing():
+                return State.IDLE
+
+        State.THROW:
+            if not animation_player.is_playing():
+                return State.IDLE
+
+        State.CATCH:
             if not animation_player.is_playing():
                 return State.IDLE
 
@@ -326,6 +355,16 @@ func transition_state(from: State, to: State) -> void:
             animation_player.play("attack")
             SoundManager.play_sfx("Attack")
 
+        State.THROW:
+            animation_player.play("throw")
+            SoundManager.play_sfx("Attack")
+            _throw_hammer()
+
+        State.CATCH:
+            animation_player.play("throw")
+            SoundManager.play_sfx("Attack")
+            has_catched_weapon = true
+
         State.FALLING_ATTACK:
             animation_player.play("falling_attack")
             SoundManager.play_sfx("Attack")
@@ -368,6 +407,17 @@ func get_distance_to_ground() -> float:
     if result:
         return result.position.y - global_position.y
     return 1000  # 没碰到地面
+
+
+func _throw_hammer() -> void:
+    has_weapon = false
+    has_catched_weapon = false
+    var weapon := hammer.instantiate() as Hammer
+    weapon.global_position = hand_mark.global_position
+    weapon.global_position.y -= 10.0
+    weapon.direction = sign(direction)
+    print("[player] throw, position: %s, dir: %s" % [weapon.position, weapon.direction])
+    get_tree().root.add_child(weapon)
 
 
 func die() -> void:
@@ -422,3 +472,7 @@ func _on_falling_hit_box_hit(hurtbox: Variant) -> void:
     Engine.time_scale = 0.01
     await get_tree().create_timer(0.2, true, false, true).timeout
     Engine.time_scale = 1
+
+
+func _on_catch_hammer() -> void:
+    has_weapon = true

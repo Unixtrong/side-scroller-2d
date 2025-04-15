@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://xjci2767b66f"]
+
+[ext_resource type="PackedScene" uid="uid://whqmfri0mdb8" path="res://pawn/projectile.tscn" id="1_crc8l"]
+[ext_resource type="Script" uid="uid://cbm5bkus1f0uw" path="res://player/hammer.gd" id="2_8mvr6"]
+[ext_resource type="Texture2D" uid="uid://b47rehgh0qd5w" path="res://assets/sprites/player/Hammer.png" id="2_psygy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_psygy"]
+radius = 17.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_crc8l"]
+radius = 19.0
+
+[node name="Hammer" instance=ExtResource("1_crc8l")]
+script = ExtResource("2_8mvr6")
+direction = 1
+max_speed = 400.0
+acceleration = 300.0
+
+[node name="Sprite2D" parent="Graphics" index="0"]
+rotation = 1.57079
+texture = ExtResource("2_psygy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/HitCheckBox" index="0"]
+shape = SubResource("CircleShape2D_psygy")
+
+[node name="Hitbox" parent="Graphics" index="2"]
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Hitbox" index="0"]
+shape = SubResource("CircleShape2D_crc8l")
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0.5, -0.5)
+
+[node name="ThrowTimer" type="Timer" parent="." index="6"]
+one_shot = true
