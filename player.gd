@@ -394,6 +394,13 @@ func _on_hurtbox_hurt(hitbox: Hitbox) -> void:
         pending_damage.source = enemy
         pending_damage.knockback_amount = enemy.stats.knockback_amount
 
+    var projectile := hitbox.owner as Projectile
+    if projectile:
+        pending_damage = Damage.new()
+        pending_damage.amount = projectile.stats.attack
+        pending_damage.source = projectile
+        pending_damage.knockback_amount = projectile.stats.knockback_amount
+
 
 func _on_hitbox_hit(hurtbox: Variant) -> void:
     Game.shake_camera(2)

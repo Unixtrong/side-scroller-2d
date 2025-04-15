@@ -526,8 +526,6 @@ _data = {
 
 [node name="Pig" instance=ExtResource("1_gm6cv")]
 script = ExtResource("2_l4kac")
-direction = -1
-max_speed = 50.0
 
 [node name="Sprite2D" parent="Graphics" index="0"]
 position = Vector2(-3, -14)

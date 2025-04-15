@@ -1,11 +1,12 @@
 class_name CannonBall
-extends Enemy
-
+extends Projectile
 
 enum State {
     IN_AIR,
     EXPLODE,
 }
+
+@onready var audio_hit: AudioStreamPlayer = $AudioHit
 
 
 func tick_physics(state: State, delta: float) -> void:
@@ -14,7 +15,6 @@ func tick_physics(state: State, delta: float) -> void:
             move(max_speed, delta)
         State.EXPLODE:
             move(0.0, delta)
-    print("[cannon_ball] velocity: %s" % [velocity])
 
 
 func move(speed: float, delta: float) -> void:

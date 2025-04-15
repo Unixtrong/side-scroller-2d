@@ -11,8 +11,6 @@
 [node name="Enemy" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 4
 script = ExtResource("1_fw1ev")
-direction = null
-max_speed = null
 
 [node name="Graphics" type="Node2D" parent="."]
 

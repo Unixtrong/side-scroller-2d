@@ -1,18 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://4l85c1mx0lh6"]
+[gd_scene load_steps=13 format=3 uid="uid://cjkxrhgleq85j"]
 
-[ext_resource type="Script" uid="uid://b6wsj5bbhp1ri" path="res://enemies/cannon_ball.gd" id="1_2l7tx"]
+[ext_resource type="Script" uid="uid://bv8bsygsd3tdf" path="res://enemies/cannon_ball.gd" id="1_2l7tx"]
 [ext_resource type="Texture2D" uid="uid://cjrwjrn2vxvb1" path="res://assets/sprites/cannon/Cannon Ball.png" id="1_6vwn3"]
+[ext_resource type="PackedScene" uid="uid://whqmfri0mdb8" path="res://pawn/projectile.tscn" id="1_r54kt"]
 [ext_resource type="Texture2D" uid="uid://wtfuf0r5pqpf" path="res://assets/sprites/cannon/Boooooom (52x56).png" id="3_vsl80"]
-[ext_resource type="PackedScene" uid="uid://yg1tmn5xucab" path="res://enemies/enemy.tscn" id="4_7xjqp"]
 [ext_resource type="AudioStream" uid="uid://xm0b5p30kwbn" path="res://assets/sfx/explosion06.wav" id="4_r54kt"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_vsl80"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_r54kt"]
 radius = 6.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_7xjqp"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_508et"]
+radius = 24.0832
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g53hn"]
 radius = 6.0
 
-[sub_resource type="Animation" id="Animation_vsl80"]
+[sub_resource type="Animation" id="Animation_g53hn"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -65,17 +68,29 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Graphics/Hitbox/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Graphics/Hitbox/ExplodeHitShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Graphics/Hitbox/InAirHitShape:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_7xjqp"]
+[sub_resource type="Animation" id="Animation_51jiu"]
 resource_name = "explode"
 length = 0.6
 step = 0.1
@@ -125,22 +140,22 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 0, 1, 2, 3, 4]
+"values": [0, 1, 2, 3, 4, 5]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Graphics/Hitbox/CollisionShape2D:disabled")
+tracks/4/path = NodePath("Graphics/Hitbox/ExplodeHitShape:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [true, false, true]
 }
 
-[sub_resource type="Animation" id="Animation_2l7tx"]
+[sub_resource type="Animation" id="Animation_508et"]
 resource_name = "in_air"
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -166,37 +181,64 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(-7, -5)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_7xjqp"]
-_data = {
-&"RESET": SubResource("Animation_vsl80"),
-&"explode": SubResource("Animation_7xjqp"),
-&"in_air": SubResource("Animation_2l7tx")
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Graphics/Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Graphics/Hitbox/InAirHitShape:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
-[node name="CannonBall" instance=ExtResource("4_7xjqp")]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_51jiu"]
+_data = {
+&"RESET": SubResource("Animation_g53hn"),
+&"explode": SubResource("Animation_51jiu"),
+&"in_air": SubResource("Animation_508et")
+}
+
+[node name="CannonBall" instance=ExtResource("1_r54kt")]
 script = ExtResource("1_2l7tx")
-direction = -1
 max_speed = 400.0
 
 [node name="Sprite2D" parent="Graphics" index="0"]
 position = Vector2(-7, -5)
 texture = ExtResource("1_6vwn3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Hitbox" index="0"]
-shape = SubResource("CircleShape2D_vsl80")
+[node name="InAirHitShape" type="CollisionShape2D" parent="Graphics/Hitbox" index="0"]
+shape = SubResource("CircleShape2D_r54kt")
+disabled = true
+
+[node name="ExplodeHitShape" type="CollisionShape2D" parent="Graphics/Hitbox" index="1"]
+shape = SubResource("CircleShape2D_508et")
+disabled = true
 
 [node name="CollisionShape2D" parent="." index="1"]
-shape = SubResource("CircleShape2D_7xjqp")
+shape = SubResource("CircleShape2D_g53hn")
 
 [node name="AnimationPlayer" parent="." index="2"]
 libraries = {
-&"": SubResource("AnimationLibrary_7xjqp")
+&"": SubResource("AnimationLibrary_51jiu")
 }
 
-[node name="AudioHit" parent="." index="5"]
-stream = ExtResource("4_r54kt")
+[node name="Stats" parent="." index="5"]
+knockback_amount = 800
 
-[node name="Stats" parent="." index="6"]
-attack = 3
-knockback_amount = 500
+[node name="AudioHit" type="AudioStreamPlayer" parent="." index="6"]
+stream = ExtResource("4_r54kt")

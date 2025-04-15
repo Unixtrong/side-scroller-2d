@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://sfs7cf7oc01p"]
+
+[ext_resource type="Script" uid="uid://dvay6d8boghjt" path="res://pawn/pawn.gd" id="1_cxpp4"]
+[ext_resource type="Script" uid="uid://b8u6r8i0qtamj" path="res://classes/HitCheckBox.gd" id="1_lv1x4"]
+[ext_resource type="Script" uid="uid://bp5qlq201qivk" path="res://classes/Hitbox.gd" id="2_cxpp4"]
+[ext_resource type="Script" uid="uid://bhvfxmsj7fely" path="res://classes/StateMachine.gd" id="5_et56d"]
+[ext_resource type="Script" uid="uid://c6oaj16n3rokm" path="res://classes/Stats.gd" id="7_jpobs"]
+
+[node name="Pawn" type="CharacterBody2D"]
+script = ExtResource("1_cxpp4")
+
+[node name="Graphics" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Graphics"]
+
+[node name="HitCheckBox" type="Area2D" parent="Graphics"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("1_lv1x4")
+
+[node name="Hitbox" type="Area2D" parent="Graphics"]
+collision_layer = 0
+collision_mask = 8
+script = ExtResource("2_cxpp4")
+metadata/_custom_type_script = "uid://bp5qlq201qivk"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+deterministic = true
+
+[node name="FreeTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_et56d")
+metadata/_custom_type_script = "uid://bhvfxmsj7fely"
+
+[node name="Stats" type="Node" parent="."]
+script = ExtResource("7_jpobs")
+max_health = 5
+metadata/_custom_type_script = "uid://c6oaj16n3rokm"

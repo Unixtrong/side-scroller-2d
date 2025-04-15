@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://whqmfri0mdb8"]
+
+[ext_resource type="PackedScene" uid="uid://sfs7cf7oc01p" path="res://pawn/pawn.tscn" id="1_hufxs"]
+[ext_resource type="Script" uid="uid://pi0q4ts4ddii" path="res://pawn/projectile.gd" id="2_uv2un"]
+
+[node name="Projectile" instance=ExtResource("1_hufxs")]
+script = ExtResource("2_uv2un")
