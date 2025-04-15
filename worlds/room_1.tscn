@@ -39,4 +39,3 @@ position = Vector2(824, 224)
 
 [node name="Cannon" parent="." instance=ExtResource("7_ua44f")]
 position = Vector2(1175, 53)
-attention_distance = 250

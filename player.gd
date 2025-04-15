@@ -57,6 +57,8 @@ var jump_start_position: Vector2
 var interacting_with: Array[Interactable]
 # 是否超出关卡世界
 var is_over_world := false
+# 是否持有武器
+var has_weapon := true
 
 @onready var graphics: Node2D = $Graphics
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -184,7 +186,7 @@ func can_wall_slide(direction: float) -> bool:
 func get_next_state(state: State) -> State:
     if stats.health == 0:
         return StateMachine.KEEP_CURRENT if state == State.DYING else State.DYING
-    
+
     if pending_damage:
         return State.HURT
 
@@ -274,13 +276,22 @@ func transition_state(from: State, to: State) -> void:
 
     match to:
         State.IDLE:
-            animation_player.play("idle")
+            if has_weapon:
+                animation_player.play("idle")
+            else:
+                animation_player.play("idle_no_weapon")
 
         State.RUNNING:
-            animation_player.play("running")
+            if has_weapon:
+                animation_player.play("running")
+            else:
+                animation_player.play("running_no_weapon")
 
         State.JUMP:
-            animation_player.play("jump")
+            if has_weapon:
+                animation_player.play("jump")
+            else:
+                animation_player.play("jump_no_weapon")
             velocity.y = JUMP_VELOCITY
             jump_start_position = global_position
             coyote_timer.stop()
@@ -288,12 +299,18 @@ func transition_state(from: State, to: State) -> void:
             SoundManager.play_sfx("Jump")
 
         State.FALL:
-            animation_player.play("fall")
+            if has_weapon:
+                animation_player.play("fall")
+            else:
+                animation_player.play("fall_no_weapon")
             if from in GROUND_STATES:
                 coyote_timer.start()
 
         State.LANDING:
-            animation_player.play("landing")
+            if has_weapon:
+                animation_player.play("landing")
+            else:
+                animation_player.play("landing_no_weapon")
 
         State.WALL_SLIDING:
             velocity.y = 0
@@ -314,7 +331,10 @@ func transition_state(from: State, to: State) -> void:
             SoundManager.play_sfx("Attack")
 
         State.HURT:
-            animation_player.play("hurt")
+            if has_weapon:
+                animation_player.play("hurt")
+            else:
+                animation_player.play("hurt_no_weapon")
             SoundManager.play_sfx("Hurt")
             InputManager.vibrate(0.6, 0.8, 0.2)
             # 掉血
