@@ -10,9 +10,13 @@ enum State {
 
 
 var player: Player
+var ghost_timer := 0.0
+var ghost_interval := 0.05  # 每 0.05 秒生成一次拖影
+
 
 @onready var audio_hit: AudioStreamPlayer = $AudioHit
 @onready var throw_timer: Timer = $ThrowTimer
+@onready var sprite_2d: Sprite2D = $Graphics/Sprite2D
 
 
 func _ready() -> void:
@@ -20,7 +24,17 @@ func _ready() -> void:
 
 
 func tick_physics(state: State, delta: float) -> void:
+    if not is_instance_valid(player):
+        queue_free()
+        return
+
+    ghost_timer += delta
+    if ghost_timer >= ghost_interval:
+        _spawn_ghost()
+        ghost_timer = 0.0
+
     rotation += 90 * delta
+
     match state:
         State.THROWING:
             throwing()
@@ -46,7 +60,7 @@ func transition_state(from: State, to: State) -> void:
         State.keys()[from] if from != -1 else "<START>",
         State.keys()[to]
     ])
-    
+
     match to:
         State.THROWING:
             throw_timer.start()
@@ -77,3 +91,18 @@ func throwing() -> void:
 
 func _can_catch() -> bool:
     return hit_check_box.is_ready_hit
+
+
+func _spawn_ghost():
+    var ghost := Sprite2D.new()
+    ghost.texture = sprite_2d.texture
+    ghost.global_position = global_position
+    ghost.rotation = rotation
+    ghost.scale = scale
+    ghost.modulate = Color(1, 1, 1, 0.4)  # 半透明
+
+    get_tree().current_scene.add_child(ghost)
+
+    var tween = ghost.create_tween()
+    tween.tween_property(ghost, "modulate:a", 0.0, 0.3).set_trans(Tween.TRANS_LINEAR)
+    tween.tween_callback(Callable(ghost, "queue_free"))

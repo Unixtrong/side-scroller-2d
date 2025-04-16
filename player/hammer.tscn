@@ -24,7 +24,7 @@ texture = ExtResource("2_psygy")
 shape = SubResource("CircleShape2D_psygy")
 
 [node name="Hitbox" parent="Graphics" index="2"]
-collision_mask = 16
+collision_mask = 17
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Graphics/Hitbox" index="0"]
 shape = SubResource("CircleShape2D_crc8l")
@@ -33,4 +33,5 @@ shape = SubResource("CircleShape2D_crc8l")
 position = Vector2(0.5, -0.5)
 
 [node name="ThrowTimer" type="Timer" parent="." index="6"]
+wait_time = 0.6
 one_shot = true
